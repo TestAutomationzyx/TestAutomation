@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dialog_width"
+    android:layout_height="match_parent"
+    android:background="@color/LightGreen"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="50dp"
+        android:paddingTop="50dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/msmnum" />
+
+        <EditText
+            android:id="@+id/msmphoneet"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:textColor="@color/LightGreen"
+            android:inputType="phone" >
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="50dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/msmcon" />
+
+        <EditText
+            android:id="@+id/msmconetet"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/LightGreen"
+            android:ems="10"
+            android:inputType="text"
+            android:text="@string/msmdeltail" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="50dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/msmcount" />
+
+        <EditText
+            android:id="@+id/msmnumet"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:textColor="@color/LightGreen"
+            android:inputType="number" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:paddingLeft="40dp" >
+
+        <Button
+            android:id="@+id/msmsure"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/White"
+            android:text="@string/sure"
+            android:textColor="@color/LightGreen"
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <Button
+            android:id="@+id/msmlist"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/White"
+            android:text="@string/list"
+            android:textColor="@color/LightGreen"
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <Button
+            android:id="@+id/msmdelete"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/White"
+            android:text="@string/delete"
+            android:textColor="@color/LightGreen"
+            style="?android:attr/buttonBarButtonStyle" />
+    </LinearLayout>
+
+</LinearLayout>

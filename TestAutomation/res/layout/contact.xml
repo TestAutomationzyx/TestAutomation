@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dialog_width"
+    android:layout_height="match_parent"
+    android:background="@color/LightPurple"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:paddingRight="50dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/ctname" />
+
+        <EditText
+            android:id="@+id/ctnameet"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="100"
+            android:textColor="@color/LightPurple"
+            android:inputType="textPersonName" >
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>  
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="50dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/number" />
+
+        <EditText
+            android:id="@+id/ctphoneet"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="100"
+            android:inputType="phone"
+            android:textColor="@color/LightPurple"
+            android:paddingRight="100dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="50dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/ctnum" />
+
+        <EditText
+            android:id="@+id/ctnumberet"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:textColor="@color/LightPurple"
+            android:inputType="number" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:paddingLeft="40dp" >
+
+        <Button
+            android:id="@+id/ctsure"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/White"
+            android:text="@string/sure"
+            android:textColor="@color/LightPurple"
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <Button
+            android:id="@+id/ctlist"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/White"
+            android:text="@string/list"
+            android:textColor="@color/LightPurple"
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <Button
+            android:id="@+id/ctdelete"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/White"
+            android:text="@string/delete"
+            android:textColor="@color/LightPurple"
+            style="?android:attr/buttonBarButtonStyle" />
+    </LinearLayout>
+
+</LinearLayout>

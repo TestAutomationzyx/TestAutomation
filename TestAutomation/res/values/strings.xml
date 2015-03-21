@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TestAutomationClient</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- 主界面 -->
+    <string name="html">生成报告</string>
+    <string name="start">开始测试</string>
+    <string name="Itemicon">图标</string>
+    <string name="Itemtext">文字</string>
+    
+    <!-- 关于手机 -->
+    <string name="information">关于手机</string>
+    <string name="phonemodel">手机型号:</string>
+    <string name="release">系统版本:</string>
+    <string name="serialno">SN号:</string>
+    <string name="imei">IMEI号:</string>
+    <string name="sdk">SDK版本号:</string>
+    <string name="resolution">分辨率:</string>
+    
+    <!-- 数据操作 -->
+    <string name="dataoperator">数据操作</string>
+    <string name="deletekey">一键清除</string>
+    <string name="callog">通话记录</string>
+    <string name="contact">联系人</string>
+    <string name="sure">单条</string>
+    <string name="list">多条</string>
+    <string name="delete">清除所有记录</string>
+    <string name="message">短信</string>
+    <string name="msmnum">来信号码:</string>
+    <string name="msmcon">信息内容:</string>
+    <string name="msmdeltail">新信息</string>
+    <string name="msmcount">数量:</string> 
+    <string name="ctname">姓名:</string>
+    <string name="number">号码:</string>
+    <string name="clnum">数量:</string>
+    <string name="cltype">呼叫类型:</string>
+    <string name="ctnum">数量:</string>
+    <string name="defaultnums">1</string>
+    
+    <!-- 颜色 -->
+    <color name="transparent">#55ff</color>
+    <color name="White">#ffffff</color>
+    <color name="Black">#303030</color>
+    <color name="orange">#FFDAB9</color>
+    <color name="LightPink">#FFB6C1</color>
+    <color name="LightBlue">#B0E0E6</color>
+    <color name="LightPurple">#E6E6FA</color>
+    <color name="LightGreen">#C1FFC1</color>
+    <color name="Brown">#8B5F65</color>
+
+</resources>
