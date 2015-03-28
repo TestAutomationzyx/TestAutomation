@@ -27,6 +27,7 @@
         <ImageView
             android:id="@+id/stop"
             android:onClick="stop"
+            android:longClickable="true"
             android:layout_width="45dp"
             android:layout_height="40dp"
             android:layout_marginRight="15dp"

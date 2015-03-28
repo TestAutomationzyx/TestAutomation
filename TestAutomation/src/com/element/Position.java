@@ -24,7 +24,6 @@ public class Position {
 	private File dumpfile;
 	private String temp;
 	private File uiautomator_jar = new File("/data/local/tmp/UiAutomator.jar");
-//	private String sdcardpath = Environment.getExternalStorageDirectory().getPath();
 	private String uiautomator_dump = "/data/local/tmp/dumpfile.xml";
 	
 	private Map<Integer, String> attrib = null;
@@ -34,17 +33,15 @@ public class Position {
 	
 	public Position(){
 		temp = uiautomator_dump;
-		Log.e("-------->", "uiautomator_dump1-------->" + uiautomator_dump);
 		dumpfile = new File(temp);
-		Log.e("-------->", "dumpfile-------->"+dumpfile.exists()+"");
+		if (!dumpfile.exists())
+			ShellUtils.execCommand(new String[]{"touch " + temp,"chmod 777 "+temp}, true);
+		if(!uiautomator_jar.exists())
+			ShellUtils.execCommand(new String[]{"cp /sdcard/TestAutomation/dump/UiAutomator.jar /data/local/tmp/"}, true);	
 	}
 	
 	//获取设备当前界面的控件信息，并解析dumpfile.xml文件
-	private void uidump(){
-		if (!dumpfile.exists())
-			ShellUtils.execCommand(new String[]{"touch " + temp,"chmod 777 "+temp}, true);
-			if(!uiautomator_jar.exists())
-				ShellUtils.execCommand(new String[]{"cp /sdcard/dump/UiAutomator.jar /data/local/tmp/"}, true);		
+	public List<UIDump> uidump(){	
 			ShellUtils.execCommand("uiautomator runtest UiAutomator.jar -c com.uia.example.my.Test", true);
 		try {
 			xml = new FileInputStream(dumpfile);
@@ -52,6 +49,7 @@ public class Position {
 			e.printStackTrace();
 		}
 		dumps = new DumpReader().getDumps(xml);
+		return dumps;
 	}
 	
 	/**
@@ -59,8 +57,8 @@ public class Position {
 	 * @param text
 	 * @return 返回元素位置坐标
 	 */
-	public Element findElementByText(String text){
-		return this.findElement(ElementAttribs.TEXT, text);
+	public Element findElementByText(String text,boolean fresh){
+		return this.findElement(ElementAttribs.TEXT, text,fresh);
 	}
 	/**
 	 * 通过text定位多个同属性的相同元素
@@ -76,8 +74,8 @@ public class Position {
 	 * @param resourceId
 	 * @return 返回元素位置坐标
 	 */
-	public Element findElementById(String resourceId){
-		return this.findElement(ElementAttribs.RESOURCE_ID, resourceId);
+	public Element findElementById(String resourceId,boolean fresh){
+		return this.findElement(ElementAttribs.RESOURCE_ID, resourceId,fresh);
 	}
 	
 	/**
@@ -93,8 +91,8 @@ public class Position {
 	 * @param className
 	 * @return 返回元素位置坐标
 	 */
-	public Element findElementByClass(String className){
-		return this.findElement(ElementAttribs.CLASS, className);
+	public Element findElementByClass(String className,boolean fresh){
+		return this.findElement(ElementAttribs.CLASS, className,fresh);
 	}
 	/**
 	 * 通过className定位多个同属性的相同元素
@@ -109,8 +107,8 @@ public class Position {
 	 * @param checked
 	 * @return 返回元素位置坐标
 	 */
-	public Element findElementByChecked(String checked){
-		return this.findElement(ElementAttribs.CHECKED, checked);
+	public Element findElementByChecked(String checked,boolean fresh){
+		return this.findElement(ElementAttribs.CHECKED, checked,fresh);
 	}
 	/**
 	 * 通过checked定位多个同属性的相同元素
@@ -125,8 +123,8 @@ public class Position {
 	 * @param checkable
 	 * @return 返回元素位置坐标
 	 */
-	public Element findElementByCheckable(String checkable){
-		return this.findElement(ElementAttribs.CHECKABLE, checkable);
+	public Element findElementByCheckable(String checkable,boolean fresh){
+		return this.findElement(ElementAttribs.CHECKABLE, checkable,fresh);
 	}
 	/**
 	 * 通过checkable定位多个同属性的相同元素
@@ -141,8 +139,8 @@ public class Position {
 	 * @param contentdesc
 	 * @return 返回元素位置坐标
 	 */
-	public Element findElementByContentdesc(String contentdesc){
-		return this.findElement(ElementAttribs.CONTENTDESC, contentdesc);
+	public Element findElementByContentdesc(String contentdesc,boolean fresh){
+		return this.findElement(ElementAttribs.CONTENTDESC, contentdesc,fresh);
 	}
 	/**
 	 * 通过contentdesc定位多个同属性的相同元素
@@ -157,8 +155,8 @@ public class Position {
 	 * @param clickable
 	 * @return 返回元素位置坐标
 	 */
-	public Element findElementByClickable(String clickable){
-		return this.findElement(ElementAttribs.CHECKED, clickable);
+	public Element findElementByClickable(String clickable,boolean fresh){
+		return this.findElement(ElementAttribs.CHECKED, clickable,fresh);
 	}
 	/**
 	 * 通过clickable定位多个同属性的相同元素
@@ -168,12 +166,12 @@ public class Position {
 	public ArrayList<Element> findElementsByClickable(String clickable){
 		return this.findElements(ElementAttribs.CHECKED, clickable);
 	}
-	private Element findElement(int att, String str){
-		uidump();
+	public Element findElement(int att, String str,boolean fresh){
+		if(fresh)
+			uidump();
 		CharSequence input = getAttrib(att, str).get(ElementAttribs.BOUNDS);
 		if (input == null)
-			throw new RuntimeException("未在当前界面找到元素(" + str + ")");
-
+			return null;//throw new RuntimeException("未在当前界面找到元素(" + str + ")");
 		Matcher mat = pattern.matcher(input);
 		ArrayList<Integer> coords = new ArrayList<Integer>();
 		while (mat.find())
@@ -195,7 +193,7 @@ public class Position {
 		return element;
 	}
 	
-	private ArrayList<Element> findElements(int att, String str){
+	public ArrayList<Element> findElements(int att, String str){
 		uidump();
 		ArrayList<Element> elements = new ArrayList<Element>();
 		ArrayList<HashMap<Integer, String>> attribs = getAttribs(att, str);
@@ -327,27 +325,6 @@ public class Position {
 		}
 		return attribs;
 	}
-	
-	/**
-	 * 判断手机是否ROOT
-	 */
-/*	public boolean isRoot() {
-
-		boolean root = false;
-
-		try {
-			if ((!new File("/system/bin/su").exists())
-					&& (!new File("/system/xbin/su").exists())) {
-				root = false;
-			} else {
-				root = true;
-			}
-
-		} catch (Exception e) {
-		}
-
-		return root;
-	}*/
 	
 	//坐标
 	public class Element  {

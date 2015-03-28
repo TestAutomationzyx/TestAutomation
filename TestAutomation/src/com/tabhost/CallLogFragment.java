@@ -58,9 +58,7 @@ public class CallLogFragment extends Fragment {
 			@Override
 			public void onClick(View arg0) {
 				String number = clphone.getText().toString();
-				Log.e("number", "number---------->"+number);
 				int type = mSpinner.getSelectedItemPosition()+1;
-				Log.e("type", "type---------->"+type);
 				int nums = Integer.parseInt(clnums.getText().toString());				
 				long startTimes = System.currentTimeMillis();
 				for(int i=0; i<nums; i++){
@@ -123,11 +121,10 @@ public class CallLogFragment extends Fragment {
 			if (convertView == null) {
 				LayoutInflater inflater = LayoutInflater.from(context);
 				convertView = inflater.inflate(
-						android.R.layout.simple_spinner_item, parent, false);
+						android.R.layout.simple_spinner_dropdown_item, parent, false);
 			}
 
-			TextView tv = (TextView) convertView
-					.findViewById(android.R.id.text1);
+			TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
 			tv.setText(items[position]);
 			tv.setGravity(Gravity.CENTER);
 			tv.setTextColor(R.color.LightPink);
@@ -143,8 +140,7 @@ public class CallLogFragment extends Fragment {
 						android.R.layout.simple_spinner_item, parent, false);
 			}
 
-			TextView tv = (TextView) convertView
-					.findViewById(android.R.id.text1);
+			TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
 			tv.setText(items[position]);
 			tv.setGravity(Gravity.CENTER);
 			tv.setTextColor(R.color.LightPink);

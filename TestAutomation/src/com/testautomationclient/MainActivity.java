@@ -7,28 +7,34 @@ import java.io.InputStream;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.content.DialogInterface.OnClickListener;
-import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.module.TestCase;
 import com.testautomationclient.MyGridLayout.GridAdatper;
 import com.testautomationclient.MyGridLayout.OnItemClickListener;
 
 
 public class MainActivity extends Activity {
 
-	private String filePath = Environment.getExternalStorageDirectory().getPath()+"/dump";
+	private String sdcardPath = Environment.getExternalStorageDirectory().getPath();
+	private String imagePath = sdcardPath+"/TestAutomation/image";
+	private String filePath = sdcardPath+"/TestAutomation/dump";
 	private String fileName = "UiAutomator.jar";
+	Context context;
 	
 	// 定义浮动窗口布局
 	LinearLayout mFloatLayout;
@@ -61,7 +67,9 @@ public class MainActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		copy();		
+		this.context = getApplicationContext();
+		copy();	
+		makeImageFile();
 		
 		grid = (MyGridLayout) findViewById(R.id.list);
 		grid.setGridAdapter(new GridAdatper() {
@@ -92,8 +100,27 @@ public class MainActivity extends Activity {
 					information();
 				}else if(titles[index].equals("数据操作")){
 					insertData();
+				}else if(titles[index].equals("开启log工具")){
+					openLog();
+				}else if(titles[index].equals("wifi监听")){
+					wifiMonitor();
+				}else if(titles[index].equals("基本")){
+					TestCase tc = new TestCase(context);
+					tc.method();
 				}else
 					moduleDialog(index);
+			}
+
+		});
+		
+		stop = (ImageView) findViewById(R.id.stop);
+		stop.setOnLongClickListener(new OnLongClickListener() {
+			
+			@Override
+			public boolean onLongClick(View arg0) {
+				Intent intent = new Intent(MainActivity.this, OpenLog.class);
+				stopService(intent);
+				return false;
 			}
 		});
 	}
@@ -109,7 +136,7 @@ public class MainActivity extends Activity {
 		stopService(intent);
 	}
 
-	public void copy() {
+	private void copy() {
 		InputStream inputStream;
 		try {
 			inputStream = getResources().getAssets().open(fileName);// assets文件夹下的文件
@@ -128,6 +155,13 @@ public class MainActivity extends Activity {
 			inputStream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	private void makeImageFile(){
+		File file = new File(imagePath);
+		if (!file.exists()) {
+			file.mkdirs();
 		}
 	}
 	
@@ -183,6 +217,15 @@ public class MainActivity extends Activity {
 	protected void insertData() {
 		Intent intent = new Intent(MainActivity.this, DataOperator.class);
 		startActivity(intent);		
-		
+	}
+	
+	protected void openLog() {
+		Intent intent = new Intent(MainActivity.this, OpenLog.class);
+		startService(intent);
+	}
+	
+	protected void wifiMonitor() {
+		Intent intent = new Intent(MainActivity.this, WifiMonitor.class);
+		startActivity(intent);
 	}
 }

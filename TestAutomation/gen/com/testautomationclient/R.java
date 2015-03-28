@@ -72,10 +72,14 @@ containing a value of this type.
         public static final int actions_start=0x7f02000b;
         public static final int actions_weibo=0x7f02000c;
         public static final int delete=0x7f02000d;
-        public static final int ic_launcher=0x7f02000e;
+        public static final int floating=0x7f02000e;
+        public static final int ic_launcher=0x7f02000f;
+        public static final int ic_launcher1=0x7f020010;
     }
     public static final class id {
-        public static final int action_settings=0x7f090026;
+        public static final int SSIDpassword=0x7f090027;
+        public static final int SSIDspinner=0x7f090026;
+        public static final int action_settings=0x7f090029;
         public static final int btn_booktag=0x7f090000;
         public static final int calllog=0x7f090016;
         public static final int cldelete=0x7f09000b;
@@ -114,6 +118,7 @@ containing a value of this type.
         public static final int tv=0x7f090002;
         public static final int typespinner=0x7f090007;
         public static final int viewpager=0x7f090017;
+        public static final int wifisure=0x7f090028;
     }
     public static final class layout {
         public static final int actions_item=0x7f030000;
@@ -124,6 +129,7 @@ containing a value of this type.
         public static final int float_layout=0x7f030005;
         public static final int info=0x7f030006;
         public static final int message=0x7f030007;
+        public static final int wifi=0x7f030008;
     }
     public static final class menu {
         public static final int main=0x7f080000;
@@ -160,13 +166,19 @@ containing a value of this type.
         public static final int msmdeltail=0x7f050018;
         public static final int msmnum=0x7f050016;
         public static final int number=0x7f05001b;
+        public static final int password=0x7f050022;
         public static final int phonemodel=0x7f050008;
         public static final int release=0x7f050009;
         public static final int resolution=0x7f05000d;
         public static final int sdk=0x7f05000c;
         public static final int serialno=0x7f05000a;
         public static final int start=0x7f050004;
+        public static final int starttomonite=0x7f050023;
         public static final int sure=0x7f050012;
+        public static final int tochoosewifi=0x7f050021;
+        /**  wifi监听 
+         */
+        public static final int wifiMonitor=0x7f050020;
     }
     public static final class style {
         /** 

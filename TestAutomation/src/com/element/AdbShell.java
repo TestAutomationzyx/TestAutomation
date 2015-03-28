@@ -198,7 +198,7 @@ public class AdbShell {
 	 * @param e
 	 *            元素对象
 	 */
-	public void tap(Element e) {
+	public void touch(Element e) {
 		ShellUtils.execCommand("input tap " + e.getX() + " " + e.getY(), true);
 		sleep(500);
 	}
@@ -289,7 +289,7 @@ public class AdbShell {
 	 * @param y
 	 * @param times
 	 */
-	public void longPress(int x, int y, long times){
+	public void longPress(double x, double y, long times){
 		swipe(x, y, x, y, times);
 	}
 	/**
@@ -316,7 +316,7 @@ public class AdbShell {
 			ShellUtils.execCommand("input text "+out.get(i), true);
 			sleep(100);
 			if(i!=length-1)
-				sendKeyEvent(AndroidKeyCode.KEYCODE_SPACE);
+				sendKeyEvent(AndroidKeyCode.SPACE);
 		}
 	}
 	/**
@@ -326,7 +326,7 @@ public class AdbShell {
 	public void clearText(String text){
 		int length = text.length();
 		for(int i =length; i>0; i--)
-			sendKeyEvent(AndroidKeyCode.KEYCODE_SPACE);
+			sendKeyEvent(AndroidKeyCode.SPACE);
 	}
 	/**
 	 * 小于1，自动乘以分辨率转换为实际坐标，大于1，当做实际坐标处理
@@ -394,5 +394,9 @@ public class AdbShell {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public String adbshell(String cmd){
+		return ShellUtils.execCommand(cmd, true).successMsg;
 	}
 }

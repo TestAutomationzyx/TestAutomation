@@ -15,10 +15,9 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class FloatingService extends Service {
 
@@ -28,7 +27,7 @@ public class FloatingService extends Service {
     //创建浮动窗口设置布局参数的对象
 	WindowManager mWindowManager;
 	
-	Button mFloatView;
+	ImageView mFloatView;
 	TextView tv;
 	
 	private static final String TAG = "FloatingService";
@@ -38,7 +37,6 @@ public class FloatingService extends Service {
 	{
 		// TODO Auto-generated method stub
 		super.onCreate();
-		Log.i(TAG, "oncreat");
 		createFloatView();	
 	}
 
@@ -93,7 +91,7 @@ public class FloatingService extends Service {
         Log.i(TAG, "mFloatLayout-->bottom" + mFloatLayout.getBottom());      
         
         //浮动窗口按钮
-        mFloatView = (Button)mFloatLayout.findViewById(R.id.float_id);
+        mFloatView = (ImageView)mFloatLayout.findViewById(R.id.float_id);
         tv = (TextView) mFloatLayout.findViewById(R.id.textView1);
 		String string = "颜色和不透明度 (alpha) 值以十六进制表示法表示。任何一种颜色的值范围都是 0 到 255（00 到 ff）。对于 alpha，00 表示完全透明，ff 表示完全不透明。表达式顺序是“aabbggrr”，其中“aa=alpha”（00 到 ff）；“bb=blue”（00 到 ff）；“gg=green”（00 到 ff)；“rr=red”（00 到 ff）。例如，如果您希望对某叠加层应用不透明度为 50% 的蓝色，则应指定以下值：7fff0000";
 		CharSequence charSequence = Html.fromHtml(string);
@@ -135,8 +133,7 @@ public class FloatingService extends Service {
 			@Override
 			public void onClick(View v) 
 			{
-				// TODO Auto-generated method stub
-				Toast.makeText(FloatingService.this, "onClick", Toast.LENGTH_SHORT).show();
+				clickIcon();
 			}
 		});
 		
@@ -151,6 +148,21 @@ public class FloatingService extends Service {
 		{
 			mWindowManager.removeView(mFloatLayout);
 		}
+	}
+	
+	public void setText(String string,int Wpixels,int Hpixels){
+		CharSequence charSequence = Html.fromHtml(string);
+		tv.setText(charSequence);
+		tv.setWidth(Wpixels);
+		tv.setHeight(Hpixels);
+	}
+	
+	public void clickIcon(){
+		
+	}
+	
+	public void setTextViewUnvisual(){
+		tv.setVisibility(View.GONE);
 	}
 
 }

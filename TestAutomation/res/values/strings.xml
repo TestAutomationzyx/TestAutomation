@@ -40,6 +40,12 @@
     <string name="ctnum">数量:</string>
     <string name="defaultnums">1</string>
     
+    <!-- wifi监听 -->
+    <string name="wifiMonitor">wifi监听</string>
+    <string name="tochoosewifi">请选择所要监听的wifi:</string>
+    <string name="password">密码:</string>
+    <string name="starttomonite">开始监听</string>
+    
     <!-- 颜色 -->
     <color name="transparent">#55ff</color>
     <color name="White">#ffffff</color>
