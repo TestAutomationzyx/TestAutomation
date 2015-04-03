@@ -6,6 +6,9 @@ import com.element.Position.Element;
 import com.utils.ShellUtils;
 
 public class AdbShell {
+	
+	String TAG = "AdbShell";
+	int[] display = new int[2];
 
 	public AdbShell() {
 
@@ -90,9 +93,8 @@ public class AdbShell {
 	 * 
 	 * @return 当前界面package/activity
 	 */
-	public String getFocusedPackageAndActicity() {
-		return dumpsys("window w | grep \\/ | grep name=").split("=")[2]
-				.replace(")", "");
+	public String getCurrentPackageAndActicity() {
+		return dumpsys("window w | grep \\/ | grep name=").split("=")[2].replace(")", "").replace("mSurface", "").trim();
 	}
 
 	/**
@@ -114,7 +116,7 @@ public class AdbShell {
 	 * @return package
 	 */
 	public String getCurrentPackageName() {
-		return getFocusedPackageAndActicity().split("/")[0];
+		return getCurrentPackageAndActicity().split("/")[0];
 	}
 
 	/**
@@ -123,7 +125,7 @@ public class AdbShell {
 	 * @return activity
 	 */
 	public String getCurrentActivity() {
-		return getFocusedPackageAndActicity().split("/")[1];
+		return getCurrentPackageAndActicity().split("/")[1];
 	}
 
 	/**
@@ -335,7 +337,8 @@ public class AdbShell {
 	 * @return
 	 */
 	private double[] ratio(double x, double y) {
-		int[] display = getScreenResolution();
+		if(display[0]==0 && display[1]==0)
+			display = getScreenResolution();
 		double[] coords = new double[2];
 
 		if (x < 1)
@@ -359,7 +362,8 @@ public class AdbShell {
 	 * @return
 	 */
 	private double[] ratio(double startX,double startY,double endX,double endY){
-		int[] display = getScreenResolution();
+		if(display[0]==0 && display[1]==0)
+			display = getScreenResolution();
 		double[] coords = new double[4];
 		if(startX<1)
 			coords[0] = display[0] * startX;
@@ -374,7 +378,7 @@ public class AdbShell {
 		else
 			coords[2] = endX;
 		if(endY<1)
-			coords[3] = display[2] * endY;
+			coords[3] = display[1] * endY;
 		else
 			coords[3] = endY;
 		

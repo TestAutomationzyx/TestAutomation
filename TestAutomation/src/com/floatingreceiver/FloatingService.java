@@ -1,4 +1,4 @@
-package com.testautomationclient;
+package com.floatingreceiver;
 
 import android.app.Service;
 import android.content.Intent;
@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.testautomationclient.R;
+
 public class FloatingService extends Service {
 
 	//定义浮动窗口布局
@@ -37,7 +39,7 @@ public class FloatingService extends Service {
 	{
 		// TODO Auto-generated method stub
 		super.onCreate();
-		createFloatView();	
+		createFloatView();		
 	}
 
 	@Override
@@ -135,10 +137,9 @@ public class FloatingService extends Service {
 			{
 				clickIcon();
 			}
-		});
-		
+		});        
 	}
-	
+
 	@Override
 	public void onDestroy() 
 	{
@@ -150,9 +151,16 @@ public class FloatingService extends Service {
 		}
 	}
 	
-	public void setText(String string,int Wpixels,int Hpixels){
+	public String getTextViewContent(){
+		return tv.getText().toString();
+	}
+	
+	public void setTextViewContent(String string){
 		CharSequence charSequence = Html.fromHtml(string);
 		tv.setText(charSequence);
+	}
+	
+	public void setTextViewSize(int Wpixels,int Hpixels){
 		tv.setWidth(Wpixels);
 		tv.setHeight(Hpixels);
 	}
@@ -163,6 +171,22 @@ public class FloatingService extends Service {
 	
 	public void setTextViewUnvisual(){
 		tv.setVisibility(View.GONE);
+	}
+	
+	public void setTextViewLine(int i){
+		tv.setLines(i);
+	}
+	
+	public void setTextColor(int color){
+		tv.setTextColor(color);
+	}
+	
+	public void setTextBackground(int color){
+		tv.setBackgroundColor(color);
+	}
+	
+	public void setIconSrc(int resId){
+		mFloatView.setImageResource(resId);
 	}
 
 }

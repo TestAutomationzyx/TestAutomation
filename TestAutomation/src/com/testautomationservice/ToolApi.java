@@ -10,12 +10,13 @@ public interface ToolApi {
 	void sendKeyCode(int keycode);
 	String getSimOperator();
 	String getElementValuebyId(String id,int index,boolean fresh,String item);
+	String getCurrentPackageAndActicity();
 	String getCurrentPackage();
 	String getCurrentActivity();
 	boolean hasFocus(String activity);
 	String closeApplication(String apppackage);
 	String closeCurrentApplicaion();
-	void startActivity(String activity);
+	boolean find(String e, int type, int index, boolean fresh, long times);
 	boolean touch(String e, int type, int index, boolean fresh, long times);
 	void touch(double x, double y,long times);
 	boolean slidebyId(String id1, String id2,boolean fresh,long times);
@@ -30,6 +31,8 @@ public interface ToolApi {
 	void slideScreenButtom();
 	void sleep(long times);
 	void returnHome();
+	void startatHome(String appname);
+	void startActivity(String activity);
 	void inputText(String text);
 	void clearText(String text);
 	void copytoClipboard(String text);
@@ -41,5 +44,8 @@ public interface ToolApi {
 	void deleteAllCallLog();
 	void insertMessage(String phone, String content, int count, boolean oneperson);
 	void deleteAllMessage();	
+	void toStep(String step);
+	void toResult(boolean result);
+	void savetoFile(String step,boolean result);
 	List<UIDump> getUIDump(boolean fresh);
 }

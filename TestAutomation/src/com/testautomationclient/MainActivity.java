@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.floatingreceiver.FloatingService;
 import com.module.TestCase;
 import com.testautomationclient.MyGridLayout.GridAdatper;
 import com.testautomationclient.MyGridLayout.OnItemClickListener;
@@ -220,8 +221,7 @@ public class MainActivity extends Activity {
 	}
 	
 	protected void openLog() {
-		Intent intent = new Intent(MainActivity.this, OpenLog.class);
-		startService(intent);
+//		OpenLog openLog = new OpenLog(context);
 	}
 	
 	protected void wifiMonitor() {

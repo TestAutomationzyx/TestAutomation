@@ -1,14 +1,16 @@
-package com.testautomationclient;
+package com.floatingreceiver;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiManager;
 import android.net.wifi.WifiConfiguration.AuthAlgorithm;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
+import android.net.wifi.WifiManager;
 import android.text.TextUtils;
 
-public class WifiFloating extends FloatingService {
+import com.testautomationclient.R;
+
+public class WifiFloatingReceiver extends FloatingService {
 
 	WifiManager wifiManager;
 	Context context;
@@ -19,6 +21,7 @@ public class WifiFloating extends FloatingService {
 		// TODO Auto-generated method stub
 		super.onCreate();
 		super.setTextViewUnvisual();
+		super.setIconSrc(R.drawable.wifi);
 		this.context = getApplicationContext();
 		this.wifiManager = (WifiManager) context.getApplicationContext()
 				.getSystemService(Context.WIFI_SERVICE);

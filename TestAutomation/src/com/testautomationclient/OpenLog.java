@@ -4,44 +4,42 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import android.content.Context;
 import android.content.Intent;
-import android.os.IBinder;
 
-public class OpenLog extends FloatingService {
+import com.floatingreceiver.LogFloatingReceiver;
 
-	@Override
-	public void onCreate() {
-		// TODO Auto-generated method stub
-		super.onCreate();
-		Process process;
+public class OpenLog {
+
+	Process process;
+	Context context;
+	
+	public OpenLog(Context context) {
+		this.context = context;
+		Intent lIntent = new Intent(context, LogFloatingReceiver.class);
+		context.startService(lIntent);
+		logcat();
+	}
+	
+	public void logcat(){
 		try {
 			process = Runtime.getRuntime().exec("logcat -d time *:V ");
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-			String line;
 			StringBuffer log = new StringBuffer();
-			while((line = bufferedReader.readLine())!=null){
-				log.append(line);				  
+			String line;
+			while((line = bufferedReader.readLine())!=null){				
+				log.append(line);
+				Intent mIntent = new Intent("com.floatingreceiver.LogFloatingReceiver");
+				mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				mIntent.putExtra("log", log.toString());
+				mIntent.setAction("logFloating");
+				context.sendBroadcast(mIntent);
 			}
-			setText(log.toString());	
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	@Override
-	public IBinder onBind(Intent intent) {
-		// TODO Auto-generated method stub
-		return super.onBind(intent);
-	}
 	
-	@Override
-	public void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-	}
-	
-	public void setText(String string) {
-		super.setText(string, 800,500);
-	}
 }

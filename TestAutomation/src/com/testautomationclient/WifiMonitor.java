@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import com.floatingreceiver.WifiFloatingReceiver;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -62,17 +64,19 @@ public class WifiMonitor extends Activity {
 		SpinnerAdapter mAdapter = new SpinnerAdapter(context,
 				android.R.layout.simple_spinner_item, SSIDlist);
 		SSIDSpinner.setAdapter(mAdapter);
-		
+
 		wifisure.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				SSID = (String) SSIDlist.get(SSIDSpinner.getSelectedItemPosition());
+				SSID = (String) SSIDlist.get(SSIDSpinner
+						.getSelectedItemPosition());
 				password = passwordet.getText().toString();
-				Intent intent = new Intent(WifiMonitor.this, WifiFloating.class);
+				Intent intent = new Intent(WifiMonitor.this, WifiFloatingReceiver.class);
 				intent.putExtra("SSID", SSID);
 				intent.putExtra("password", password);
+				stopService(intent);
 				startService(intent);
 				finish();
 			}
@@ -116,20 +120,22 @@ public class WifiMonitor extends Activity {
 		// 开始扫描网络
 		wifiManager = (WifiManager) context.getApplicationContext()
 				.getSystemService(Context.WIFI_SERVICE);
+		if (!wifiManager.isWifiEnabled())
+			wifiManager.setWifiEnabled(true);
 		list = wifiManager.getScanResults();
 		SSIDlist = new ArrayList<CharSequence>();
 		HashSet<CharSequence> SSIDset = new HashSet<CharSequence>();
 		for (ScanResult scanresult : list) {
 			SSIDset.add(scanresult.SSID);
 		}
-		for(CharSequence c :SSIDset){
-			if(c!="")
+		for (CharSequence c : SSIDset) {
+			if (c != "")
 				SSIDlist.add(c);
 		}
 	}
-	
+
 	// 定义几种加密方式，一种是WEP，一种是WPA，还有没有密码的情况
-			public enum WifiCipherType {
-				WIFICIPHER_WEP, WIFICIPHER_WPA, WIFICIPHER_NOPASS, WIFICIPHER_INVALID
-			}
+	public enum WifiCipherType {
+		WIFICIPHER_WEP, WIFICIPHER_WPA, WIFICIPHER_NOPASS, WIFICIPHER_INVALID
+	}
 }

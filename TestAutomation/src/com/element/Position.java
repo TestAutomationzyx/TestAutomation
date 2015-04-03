@@ -65,8 +65,8 @@ public class Position {
 	 * @param text 返回元素位置坐标集合
 	 * @return
 	 */
-	public ArrayList<Element> findElementsByText(String text){
-		return this.findElements(ElementAttribs.TEXT, text);
+	public ArrayList<Element> findElementsByText(String text,boolean fresh){
+		return this.findElements(ElementAttribs.TEXT, text,fresh);
 	}
 	
 	/**
@@ -83,8 +83,8 @@ public class Position {
 	 * @param resourceId 返回元素位置坐标集合
 	 * @return
 	 */
-	public ArrayList<Element> findElementsById(String resourceId){
-		return this.findElements(ElementAttribs.RESOURCE_ID, resourceId);
+	public ArrayList<Element> findElementsById(String resourceId,boolean fresh){
+		return this.findElements(ElementAttribs.RESOURCE_ID, resourceId,fresh);
 	}
 	/**
 	 * 返回className定位单个元素
@@ -99,8 +99,8 @@ public class Position {
 	 * @param className 返回元素位置坐标集合
 	 * @return
 	 */
-	public ArrayList<Element> findElementsByClass(String className){
-		return this.findElements(ElementAttribs.CLASS, className);
+	public ArrayList<Element> findElementsByClass(String className,boolean fresh){
+		return this.findElements(ElementAttribs.CLASS, className,fresh);
 	}
 	/**
 	 * 返回checked定位单个元素
@@ -115,8 +115,8 @@ public class Position {
 	 * @param checked 返回元素位置坐标集合
 	 * @return
 	 */
-	public ArrayList<Element> findElementsByChecked(String checked){
-		return this.findElements(ElementAttribs.CHECKED, checked);
+	public ArrayList<Element> findElementsByChecked(String checked,boolean fresh){
+		return this.findElements(ElementAttribs.CHECKED, checked,fresh);
 	}
 	/**
 	 * 返回checkable定位单个元素
@@ -131,8 +131,8 @@ public class Position {
 	 * @param checkable 返回元素位置坐标集合
 	 * @return
 	 */
-	public ArrayList<Element> findElementsByCheckable(String checkable){
-		return this.findElements(ElementAttribs.CHECKABLE, checkable);
+	public ArrayList<Element> findElementsByCheckable(String checkable,boolean fresh){
+		return this.findElements(ElementAttribs.CHECKABLE, checkable,fresh);
 	}
 	/**
 	 * 返回contentdesc定位单个元素
@@ -147,8 +147,8 @@ public class Position {
 	 * @param contentdesc 返回元素位置坐标集合
 	 * @return
 	 */
-	public ArrayList<Element> findElementsByContentdesc(String contentdesc){
-		return this.findElements(ElementAttribs.CONTENTDESC, contentdesc);
+	public ArrayList<Element> findElementsByContentdesc(String contentdesc,boolean fresh){
+		return this.findElements(ElementAttribs.CONTENTDESC, contentdesc,fresh);
 	}
 	/**
 	 * 返回clickable定位单个元素
@@ -163,8 +163,8 @@ public class Position {
 	 * @param clickable 返回元素位置坐标集合
 	 * @return
 	 */
-	public ArrayList<Element> findElementsByClickable(String clickable){
-		return this.findElements(ElementAttribs.CHECKED, clickable);
+	public ArrayList<Element> findElementsByClickable(String clickable,boolean fresh){
+		return this.findElements(ElementAttribs.CHECKED, clickable,fresh);
 	}
 	public Element findElement(int att, String str,boolean fresh){
 		if(fresh)
@@ -193,8 +193,9 @@ public class Position {
 		return element;
 	}
 	
-	public ArrayList<Element> findElements(int att, String str){
-		uidump();
+	public ArrayList<Element> findElements(int att, String str,boolean fresh){
+		if(fresh)
+			uidump();
 		ArrayList<Element> elements = new ArrayList<Element>();
 		ArrayList<HashMap<Integer, String>> attribs = getAttribs(att, str);
 		

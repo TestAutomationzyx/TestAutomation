@@ -1,5 +1,9 @@
 package com.testautomationservice;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +14,7 @@ import android.content.ClipboardManager;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.provider.CallLog;
@@ -24,6 +29,7 @@ import com.element.AdbShell;
 import com.element.AndroidKeyCode;
 import com.element.Position;
 import com.element.Position.Element;
+import com.floatingreceiver.StepFloatingReceiver;
 import com.utils.UIDump;
 
 @SuppressLint("SimpleDateFormat")
@@ -38,7 +44,10 @@ public class AutoTool implements ToolApi {
 
 	public AutoTool(Context context) {
 		this.context = context;
+		Intent sIntent = new Intent(context, StepFloatingReceiver.class);
+		context.startService(sIntent);
 		adbTool = new AdbShell();
+		sendKeyCode(AndroidKeyCode.HOME);
 		position = new Position();
 		telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 		wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
@@ -57,6 +66,11 @@ public class AutoTool implements ToolApi {
 	public String getElementValuebyId(String id, int index, boolean fresh, String item) {
 		return null;
 	}
+	
+	@Override
+	public String getCurrentPackageAndActicity() {
+		return adbTool.getCurrentPackageAndActicity();
+	}
 
 	@Override
 	public String getCurrentPackage() {
@@ -70,7 +84,7 @@ public class AutoTool implements ToolApi {
 	
 	@Override
 	public boolean hasFocus(String activity) {
-		return getCurrentActivity().equals(activity);
+		return getCurrentPackageAndActicity().equals(activity);
 	}
 
 	@Override
@@ -90,8 +104,14 @@ public class AutoTool implements ToolApi {
 
 	@Override
 	public boolean touch(String e, int type, int index, boolean fresh, long times) {
-		adbTool.touch(position.findElement(type, e,fresh));
-		return false;
+		Element e1 = position.findElements(type, e,fresh).get(index);
+//				position.findElement(type, e,fresh);
+		if(e1==null)
+			return false;
+		else{
+			adbTool.touch(e1);
+			return true;
+		}
 	}
 
 	@Override
@@ -119,7 +139,7 @@ public class AutoTool implements ToolApi {
 		long startTimes = System.currentTimeMillis();
 		while ((System.currentTimeMillis() - startTimes) <= times) {
 			sleep(500);
-			if (position.findElementsById(id).size() >= index) {
+			if (position.findElementsById(id,true).get(index) != null) {
 				return true;
 			}
 		}
@@ -131,7 +151,7 @@ public class AutoTool implements ToolApi {
 		long startTimes = System.currentTimeMillis();
 		while ((System.currentTimeMillis() - startTimes) <= times) {
 			sleep(500);
-			if (position.findElementsByText(text).size() >= index) {
+			if (position.findElementsByText(text, true).get(index) != null) {
 				return true;
 			}
 		}
@@ -198,9 +218,6 @@ public class AutoTool implements ToolApi {
 	public void copytoClipboard(String text) {
 		clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
 		clipboardManager.setPrimaryClip(ClipData.newPlainText(null, text));  
-//		if (clipboardManager.hasPrimaryClip()){  
-//		    clipboardManager.getPrimaryClip().getItemAt(0).getText();  
-//		}  
 	}
 
 	@Override
@@ -322,4 +339,80 @@ public class AutoTool implements ToolApi {
 		return null;
 	}
 
+	@Override
+	public void toStep(String step) {
+		Intent mIntent = new Intent("com.floatingreceiver.StepFloatingReceiver");
+		mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		mIntent.putExtra("step", step);
+		mIntent.putExtra("result", "");
+		mIntent.setAction("stepFloating");
+		context.sendBroadcast(mIntent);	
+	}
+
+	@Override
+	public void toResult(boolean result) {
+		Intent mIntent = new Intent("com.floatingreceiver.StepFloatingReceiver");
+		mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		mIntent.putExtra("step", "");
+		mIntent.putExtra("result", String.valueOf(result));
+		mIntent.setAction("stepFloating");
+		context.sendBroadcast(mIntent);		
+	}
+
+	@Override
+	public void savetoFile(String step, boolean result) {
+			String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+			String rootPath = path.substring(0, path.lastIndexOf("/WEB-INF"));
+			String folderpath=rootPath+"//userOPerationLogs";
+			File folder=new File(folderpath);
+			if(!folder.exists()){
+				folder.mkdir();
+			}
+			if(!folder.exists()) return;
+//			String day=PublicUtil.getYYYYMMDD(new Date());
+			String fileName=folderpath+"//file_name.txt";
+			System.out.println(fileName);
+			FileWriter fw = null;
+			try {
+				//如果文件存在，则追加内容；如果文件不存在，则创建文件
+			    File f=new File(fileName);
+			    fw = new FileWriter(f, true);
+			   }catch (IOException e) {
+				   e.printStackTrace();
+			   }
+			   PrintWriter pw = new PrintWriter(fw);
+			   pw.println(step+"#"+result);
+			   pw.flush();
+			   try {
+			    fw.flush();
+			    pw.close();
+			    fw.close();
+			   } catch (IOException e) {
+			    e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void startatHome(String appname) {
+		returnHome();
+		for(int i=0;i<10;i++){
+			if(waitforText(appname, 1, 0))
+				break;
+			else{
+				if(i<5){
+					
+				}else {
+					
+				}
+			}			
+		}
+		
+	}
+
+	@Override
+	public boolean find(String e, int type, int index, boolean fresh, long times) {
+//		if(position.findElement(att, str, fresh))
+		return false;
+	}
 }

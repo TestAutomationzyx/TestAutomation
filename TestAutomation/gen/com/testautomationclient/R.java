@@ -75,6 +75,7 @@ containing a value of this type.
         public static final int floating=0x7f02000e;
         public static final int ic_launcher=0x7f02000f;
         public static final int ic_launcher1=0x7f020010;
+        public static final int wifi=0x7f020011;
     }
     public static final class id {
         public static final int SSIDpassword=0x7f090027;
