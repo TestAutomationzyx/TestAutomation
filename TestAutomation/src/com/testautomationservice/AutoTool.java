@@ -15,8 +15,10 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.os.Environment;
 import android.provider.CallLog;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.RawContacts;
@@ -29,6 +31,7 @@ import com.element.AdbShell;
 import com.element.AndroidKeyCode;
 import com.element.Position;
 import com.element.Position.Element;
+import com.element.Position.ElementAttribs;
 import com.floatingreceiver.StepFloatingReceiver;
 import com.utils.UIDump;
 
@@ -41,6 +44,9 @@ public class AutoTool implements ToolApi {
 	ClipboardManager clipboardManager;
 	TelephonyManager telephonyManager;
 	WifiManager wifiManager;
+	int stepNum=1;
+	String sdcardPath = Environment.getExternalStorageDirectory().getPath();
+	String reportPath = sdcardPath+"/TestAutomation/report";
 
 	public AutoTool(Context context) {
 		this.context = context;
@@ -104,14 +110,24 @@ public class AutoTool implements ToolApi {
 
 	@Override
 	public boolean touch(String e, int type, int index, boolean fresh, long times) {
-		Element e1 = position.findElements(type, e,fresh).get(index);
-//				position.findElement(type, e,fresh);
-		if(e1==null)
+		List<Element> eList = position.findElements(type, e,fresh);
+		if(eList.size()<index)
 			return false;
 		else{
+			Element e1 = eList.get(index);
 			adbTool.touch(e1);
 			return true;
 		}
+	}
+	
+	@Override
+	public boolean touchText(String e, int index, boolean fresh, long times) {
+		return touch(e, ElementAttribs.TEXT, index, fresh, times);
+	}
+
+	@Override
+	public boolean touchId(String id, int index, boolean fresh, long times) {
+		return touch(id, ElementAttribs.RESOURCE_ID, index, fresh, times);
 	}
 
 	@Override
@@ -148,10 +164,12 @@ public class AutoTool implements ToolApi {
 
 	@Override
 	public boolean waitforText(String text, int index, long times) {
+		if(times==0)
+			return position.findElementsByText(text, true).size()>=index+1;
 		long startTimes = System.currentTimeMillis();
 		while ((System.currentTimeMillis() - startTimes) <= times) {
 			sleep(500);
-			if (position.findElementsByText(text, true).get(index) != null) {
+			if (position.findElementsByText(text, true).size()>=index+1) {
 				return true;
 			}
 		}
@@ -160,7 +178,8 @@ public class AutoTool implements ToolApi {
 
 	@Override
 	public boolean isPlaying() {
-		return false;
+		AudioManager audioManage = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+		return audioManage.isMusicActive();
 	}
 
 	@Override
@@ -230,12 +249,13 @@ public class AutoTool implements ToolApi {
 	}
 	
 	@Override
-	public void screenShot(String name) {
+	public String screenShot(String name) {
 		long currentTime = System.currentTimeMillis();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 		Date date = new Date(currentTime);
-		adbTool.adbshell("screencap -p /sdcard/TestAutomation/image/" + name
-				+ "_" + formatter.format(date) + ".png");
+		String image = name+ "_" + formatter.format(date) + ".png";
+		adbTool.adbshell("screencap -p /sdcard/TestAutomation/image/" + image);
+		return image;
 	}
 
 	@Override
@@ -340,79 +360,76 @@ public class AutoTool implements ToolApi {
 	}
 
 	@Override
-	public void toStep(String step) {
+	public String toStep(String step) {
 		Intent mIntent = new Intent("com.floatingreceiver.StepFloatingReceiver");
 		mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		mIntent.putExtra("step", step);
+		mIntent.putExtra("step", stepNum+"."+step);
 		mIntent.putExtra("result", "");
 		mIntent.setAction("stepFloating");
 		context.sendBroadcast(mIntent);	
+		return stepNum+"."+step;
 	}
 
 	@Override
-	public void toResult(boolean result) {
+	public boolean toResult(boolean result) {
 		Intent mIntent = new Intent("com.floatingreceiver.StepFloatingReceiver");
 		mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		mIntent.putExtra("step", "");
 		mIntent.putExtra("result", String.valueOf(result));
 		mIntent.setAction("stepFloating");
-		context.sendBroadcast(mIntent);		
+		context.sendBroadcast(mIntent);	
+		stepNum++;
+		return result;
 	}
 
 	@Override
-	public void savetoFile(String step, boolean result) {
-			String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-			String rootPath = path.substring(0, path.lastIndexOf("/WEB-INF"));
-			String folderpath=rootPath+"//userOPerationLogs";
-			File folder=new File(folderpath);
-			if(!folder.exists()){
-				folder.mkdir();
-			}
-			if(!folder.exists()) return;
-//			String day=PublicUtil.getYYYYMMDD(new Date());
-			String fileName=folderpath+"//file_name.txt";
-			System.out.println(fileName);
-			FileWriter fw = null;
-			try {
-				//如果文件存在，则追加内容；如果文件不存在，则创建文件
-			    File f=new File(fileName);
-			    fw = new FileWriter(f, true);
-			   }catch (IOException e) {
-				   e.printStackTrace();
-			   }
-			   PrintWriter pw = new PrintWriter(fw);
-			   pw.println(step+"#"+result);
-			   pw.flush();
-			   try {
-			    fw.flush();
-			    pw.close();
-			    fw.close();
-			   } catch (IOException e) {
-			    e.printStackTrace();
+	public void addtoFile(String file, String step, boolean result) {
+		File folder = new File(reportPath);
+		if (!folder.exists()) {
+			folder.mkdir();
 		}
-		
+		if (!folder.exists())
+			return;
+		String fileName = reportPath + "//"+file+".txt";
+		System.out.println(fileName);
+		FileWriter fw = null;
+		try {
+			// 如果文件存在，则追加内容；如果文件不存在，则创建文件
+			File f = new File(fileName);
+			fw = new FileWriter(f, true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String picture = "";
+		if (!result)
+			picture = screenShot("errors");
+		PrintWriter pw = new PrintWriter(fw);
+		pw.println(step + "#" + result + "#" + picture);
+		pw.flush();
+		try {
+			fw.flush();
+			pw.close();
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void startatHome(String appname) {
 		returnHome();
 		for(int i=0;i<10;i++){
-			if(waitforText(appname, 1, 0))
+			if(waitforText(appname, 0, 0))
 				break;
 			else{
 				if(i<5){
-					
+					slideScreenLeft();
 				}else {
-					
+					slideScreenRight();
 				}
 			}			
 		}
-		
+		touch(appname, ElementAttribs.TEXT, 0, false, 0);
 	}
 
-	@Override
-	public boolean find(String e, int type, int index, boolean fresh, long times) {
-//		if(position.findElement(att, str, fresh))
-		return false;
-	}
 }

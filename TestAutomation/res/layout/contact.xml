@@ -89,7 +89,7 @@
             android:layout_height="40dp"
             android:layout_marginRight="15dp"
             android:background="@color/White"
-            android:text="@string/sure"
+            android:text="@string/one"
             android:textColor="@color/LightPurple"
             style="?android:attr/buttonBarButtonStyle" />
 

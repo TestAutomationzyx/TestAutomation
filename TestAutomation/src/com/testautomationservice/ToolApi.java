@@ -16,8 +16,9 @@ public interface ToolApi {
 	boolean hasFocus(String activity);
 	String closeApplication(String apppackage);
 	String closeCurrentApplicaion();
-	boolean find(String e, int type, int index, boolean fresh, long times);
 	boolean touch(String e, int type, int index, boolean fresh, long times);
+	boolean touchText(String e, int index, boolean fresh,long times);
+	boolean touchId(String id, int index, boolean fresh,long times);
 	void touch(double x, double y,long times);
 	boolean slidebyId(String id1, String id2,boolean fresh,long times);
 	boolean waitforId(String id,int index,long times);
@@ -37,15 +38,15 @@ public interface ToolApi {
 	void clearText(String text);
 	void copytoClipboard(String text);
 	void pasteText(String text,boolean fresh);
-	void screenShot(String name);
+	String screenShot(String name);
 	void insertContact(String given_name, String phone,int count,boolean oneperson);
 	void deleteAllContact();
 	void insertCallLog(String phone, int count, boolean oneperson);
 	void deleteAllCallLog();
 	void insertMessage(String phone, String content, int count, boolean oneperson);
 	void deleteAllMessage();	
-	void toStep(String step);
-	void toResult(boolean result);
-	void savetoFile(String step,boolean result);
+	String toStep(String step);
+	boolean toResult(boolean result);
+	void addtoFile(String file, String step,boolean result);
 	List<UIDump> getUIDump(boolean fresh);
 }

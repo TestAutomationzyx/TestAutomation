@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,6 +17,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.Window;
@@ -24,13 +27,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.floatingreceiver.FloatingService;
-import com.module.TestCase;
 import com.testautomationclient.MyGridLayout.GridAdatper;
 import com.testautomationclient.MyGridLayout.OnItemClickListener;
+import com.testcase.CaseItems;
+import com.testcase.TestCase;
 
 
 public class MainActivity extends Activity {
 
+	String TAG="MainActivity";
 	private String sdcardPath = Environment.getExternalStorageDirectory().getPath();
 	private String imagePath = sdcardPath+"/TestAutomation/image";
 	private String filePath = sdcardPath+"/TestAutomation/dump";
@@ -58,8 +63,7 @@ public class MainActivity extends Activity {
 	String titles[] = { "基本", "系统", "压力", "界面", "适配", "语言", "性能", "调试", "搜索",
 			"关于手机", "数据操作", "开启log工具", "wifi监听", "Monkey测试", "开启权限", "添加更多" };
 
-	CharSequence items[] = { "电话", "联系人", "文档", "阅读", "视频", "音乐", "图库",
-			"画板", "相机", "天气", "便签" };
+	
 	
 	CharSequence button[] = { "确定", "取消" };
 
@@ -105,9 +109,8 @@ public class MainActivity extends Activity {
 					openLog();
 				}else if(titles[index].equals("wifi监听")){
 					wifiMonitor();
-				}else if(titles[index].equals("基本")){
-					TestCase tc = new TestCase(context);
-					tc.method();
+				}else if(titles[index].equals("调试")){
+					debugCase();
 				}else
 					moduleDialog(index);
 			}
@@ -125,6 +128,7 @@ public class MainActivity extends Activity {
 			}
 		});
 	}
+
 
 	public void start(View view) {
 		Intent intent = new Intent(MainActivity.this, FloatingService.class);
@@ -166,23 +170,32 @@ public class MainActivity extends Activity {
 		}
 	}
 	
-	protected void moduleDialog(int index){
+	protected void moduleDialog(final int index){
 		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 		builder.setIcon(srcs[index]);
 		builder.setTitle(titles[index]);
+		final CharSequence[] items = new CaseItems().getModule(titles[index]);
+		final List<String> modules = new ArrayList<String>();
+		final boolean flags[] = new boolean[items.length];
 		builder.setMultiChoiceItems(items, null, new OnMultiChoiceClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog,
 					int which, boolean ischecked) {
-					// TODO Auto-generated method stub
-
+				
+				flags[which]=ischecked;
+				modules.clear();
+				for(int i=0; i<flags.length;i++)
+					if(flags[i])
+						modules.add(items[i].toString());
 				}
 			});
 		builder.setPositiveButton(button[0], new OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {
-				// TODO Auto-generated method stub
+				for(String m:modules)
+					Log.e(TAG, m);
+				new TestCase(context).startCase(titles[index],modules);
 				
 			}
 		});
@@ -226,6 +239,11 @@ public class MainActivity extends Activity {
 	
 	protected void wifiMonitor() {
 		Intent intent = new Intent(MainActivity.this, WifiMonitor.class);
+		startActivity(intent);
+	}
+	
+	protected void debugCase() {
+		Intent intent = new Intent(MainActivity.this, DebugCase.class);
 		startActivity(intent);
 	}
 }

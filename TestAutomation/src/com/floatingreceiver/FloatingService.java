@@ -169,6 +169,14 @@ public class FloatingService extends Service {
 		
 	}
 	
+	public void setIconSrc(int resId){
+		mFloatView.setImageResource(resId);
+	}
+	
+	public void setIconUnvisual(){
+		mFloatView.setVisibility(View.GONE);
+	}
+	
 	public void setTextViewUnvisual(){
 		tv.setVisibility(View.GONE);
 	}
@@ -183,10 +191,6 @@ public class FloatingService extends Service {
 	
 	public void setTextBackground(int color){
 		tv.setBackgroundColor(color);
-	}
-	
-	public void setIconSrc(int resId){
-		mFloatView.setImageResource(resId);
 	}
 
 }

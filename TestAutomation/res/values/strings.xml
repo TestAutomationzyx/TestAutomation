@@ -25,7 +25,7 @@
     <string name="deletekey">一键清除</string>
     <string name="callog">通话记录</string>
     <string name="contact">联系人</string>
-    <string name="sure">单条</string>
+    <string name="one">单条</string>
     <string name="list">多条</string>
     <string name="delete">清除所有记录</string>
     <string name="message">短信</string>
@@ -45,6 +45,17 @@
     <string name="tochoosewifi">请选择所要监听的wifi:</string>
     <string name="password">密码:</string>
     <string name="starttomonite">开始监听</string>
+    
+    <!-- 调试 -->
+    <string name="debugcase">调试</string>
+    <string name="type">类型：</string>
+    <string name="module">模块：</string>
+    <string name="step">步骤：</string>
+    <string name="inputtype">点击选择案例类型</string>
+    <string name="inputmodule">点击选择案例模块</string>
+    <string name="inputstep">点击选择执行步骤</string>
+    <string name="sure">确定</string>
+    <string name="cancel">取消</string>
     
     <!-- 颜色 -->
     <color name="transparent">#55ff</color>

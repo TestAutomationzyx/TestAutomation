@@ -23,12 +23,13 @@ public class StepFloatingReceiver extends FloatingService {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			if((mResult = intent.getStringExtra("result")).equals("")){
+				setTextColor(Color.rgb(255, 218, 185));
 				mStep = intent.getStringExtra("step");
 				setTextViewContent(mStep);
 			}else{
 				if(mResult.equals("false"))
-					setTextColor(Color.RED);
-				setTextViewContent(getTextViewContent() + "\t"+mResult);
+					setTextColor(Color.rgb(255, 99, 71));
+				setTextViewContent(getTextViewContent() + "\t"+mResult);					
 			}			
 		}
 		

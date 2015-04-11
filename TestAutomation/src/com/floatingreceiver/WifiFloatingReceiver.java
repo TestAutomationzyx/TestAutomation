@@ -1,12 +1,19 @@
 package com.floatingreceiver;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.AuthAlgorithm;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.testautomationclient.R;
 
@@ -14,7 +21,8 @@ public class WifiFloatingReceiver extends FloatingService {
 
 	WifiManager wifiManager;
 	Context context;
-	String SSID, password;
+	WifiStateReceiver wifiStateReceiver;
+	String TAG="WifiFloatingReceiver",SSID, password;
 
 	@Override
 	public void onCreate() {
@@ -25,14 +33,19 @@ public class WifiFloatingReceiver extends FloatingService {
 		this.context = getApplicationContext();
 		this.wifiManager = (WifiManager) context.getApplicationContext()
 				.getSystemService(Context.WIFI_SERVICE);
+
+		// 注册网络监听
+		wifiStateReceiver = new WifiStateReceiver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+		filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+		registerReceiver(wifiStateReceiver, filter);
 	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-//		int i = super.onStartCommand(intent, flags, startId);
 		SSID = intent.getStringExtra("SSID");
 		password = intent.getStringExtra("password");
-//		return i;
 		return START_STICKY;
 	}
 
@@ -40,7 +53,8 @@ public class WifiFloatingReceiver extends FloatingService {
 	public void clickIcon() {
 		// TODO Auto-generated method stub
 		super.clickIcon();
-		connect(SSID, password, WifiCipherType.WIFICIPHER_WPA);
+		unregisterReceiver(wifiStateReceiver);
+		stopSelf();
 	}
 
 	// 定义几种加密方式，一种是WEP，一种是WPA，还有没有密码的情况
@@ -50,27 +64,14 @@ public class WifiFloatingReceiver extends FloatingService {
 
 	// 提供一个外部接口，传入要连接的无线网
 	public void connect(String ssid, String password, WifiCipherType type) {
-		while (true) {
-			while (wifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLED
-					|| wifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLING) {
-				Thread thread = new Thread(new ConnectRunnable(ssid, password,
-						type));
+		if (wifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLING
+				||wifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLED) {
+			try {
+				Thread thread = new Thread(new ConnectRunnable(ssid, password,type));
 				thread.start();
-				try {
-					Thread.sleep(5 * 1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			while (wifiManager.getWifiState() == WifiManager.WIFI_STATE_DISABLED
-					|| wifiManager.getWifiState() == WifiManager.WIFI_STATE_DISABLING) {
-				try {
-					Thread.sleep(5 * 1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				Thread.currentThread();
+				Thread.sleep(100);
+			} catch (InterruptedException ie) {
 			}
 		}
 	}
@@ -190,6 +191,68 @@ public class WifiFloatingReceiver extends FloatingService {
 		}
 
 		return true;
+	}
+
+	class WifiStateReceiver extends BroadcastReceiver {
+
+		// 0 --> WIFI_STATE_DISABLING
+		// 1 --> WIFI_STATE_DISABLED
+		// 2 --> WIFI_STATE_ENABLING
+		// 3 --> WIFI_STATE_ENABLED
+		// 4 --> WIFI_STATE_UNKNOWN
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			Bundle bundle = intent.getExtras();
+			int oldInt = bundle.getInt("previous_wifi_state");
+			int newInt = bundle.getInt("wifi_state");
+			Log.i(TAG, oldInt+"");
+			Log.i(TAG, newInt+"");
+			
+			if (newInt == WifiManager.WIFI_STATE_ENABLING
+					|| newInt == WifiManager.WIFI_STATE_ENABLED) {
+				connect(SSID, password, WifiCipherType.WIFICIPHER_WPA);
+			} else if (newInt == WifiManager.WIFI_STATE_DISABLING
+					|| newInt == WifiManager.WIFI_STATE_DISABLED) {
+				connect(SSID, password, WifiCipherType.WIFICIPHER_WPA);
+			} else {
+				
+			}
+
+			WifiInfo info = wifiManager.getConnectionInfo();
+			Log.i(TAG, ">>>onReceive.wifiInfo=" + info.toString());
+			Log.i(TAG, ">>>onReceive.SSID=" + info.getSSID());
+	
+			if (WifiManager.NETWORK_STATE_CHANGED_ACTION.equals(intent.getAction())) {
+				Parcelable parcelableExtra = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+				if (null != parcelableExtra) {
+					NetworkInfo networkInfo = (NetworkInfo) parcelableExtra;
+					switch (networkInfo.getState()) {
+					case CONNECTED:
+						Log.i(TAG,"APActivity-->CONNECTED");
+						break;
+					case CONNECTING:
+						Log.i(TAG,"APActivity-->CONNECTING");
+						break;
+					case DISCONNECTED:
+						Log.i(TAG,"APActivity-->DISCONNECTED");
+						break;
+					case DISCONNECTING:
+						Log.i(TAG,"APActivity-->DISCONNECTING");
+						break;
+					case SUSPENDED:
+						Log.i(TAG,"APActivity-->SUSPENDED");
+						break;
+					case UNKNOWN:
+						Log.i(TAG,"APActivity-->UNKNOWN");
+						break;
+					default:
+						break;
+					}
+				}
+			}
+		}
 	}
 
 }

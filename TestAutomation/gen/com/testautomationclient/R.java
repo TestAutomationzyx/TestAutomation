@@ -71,16 +71,17 @@ containing a value of this type.
         public static final int actions_order=0x7f02000a;
         public static final int actions_start=0x7f02000b;
         public static final int actions_weibo=0x7f02000c;
-        public static final int delete=0x7f02000d;
-        public static final int floating=0x7f02000e;
-        public static final int ic_launcher=0x7f02000f;
-        public static final int ic_launcher1=0x7f020010;
-        public static final int wifi=0x7f020011;
+        public static final int button=0x7f02000d;
+        public static final int delete=0x7f02000e;
+        public static final int floating=0x7f02000f;
+        public static final int ic_launcher=0x7f020010;
+        public static final int ic_launcher1=0x7f020011;
+        public static final int wifi=0x7f020012;
     }
     public static final class id {
-        public static final int SSIDpassword=0x7f090027;
-        public static final int SSIDspinner=0x7f090026;
-        public static final int action_settings=0x7f090029;
+        public static final int SSIDpassword=0x7f09002e;
+        public static final int SSIDspinner=0x7f09002d;
+        public static final int action_settings=0x7f090030;
         public static final int btn_booktag=0x7f090000;
         public static final int calllog=0x7f090016;
         public static final int cldelete=0x7f09000b;
@@ -95,6 +96,7 @@ containing a value of this type.
         public static final int ctnumberet=0x7f09000e;
         public static final int ctphoneet=0x7f09000d;
         public static final int ctsure=0x7f09000f;
+        public static final int dbtc_sure=0x7f09002c;
         public static final int deletekey=0x7f090012;
         public static final int float_id=0x7f090018;
         public static final int imei=0x7f09001c;
@@ -117,9 +119,15 @@ containing a value of this type.
         public static final int tab=0x7f090013;
         public static final int textView1=0x7f090019;
         public static final int tv=0x7f090002;
+        public static final int txt_module=0x7f090028;
+        public static final int txt_showmodule=0x7f090029;
+        public static final int txt_showstep=0x7f09002b;
+        public static final int txt_showtype=0x7f090027;
+        public static final int txt_step=0x7f09002a;
+        public static final int txt_type=0x7f090026;
         public static final int typespinner=0x7f090007;
         public static final int viewpager=0x7f090017;
-        public static final int wifisure=0x7f090028;
+        public static final int wifisure=0x7f09002f;
     }
     public static final class layout {
         public static final int actions_item=0x7f030000;
@@ -130,7 +138,8 @@ containing a value of this type.
         public static final int float_layout=0x7f030005;
         public static final int info=0x7f030006;
         public static final int message=0x7f030007;
-        public static final int wifi=0x7f030008;
+        public static final int testacse_list=0x7f030008;
+        public static final int wifi=0x7f030009;
     }
     public static final class menu {
         public static final int main=0x7f080000;
@@ -141,6 +150,7 @@ containing a value of this type.
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
         public static final int callog=0x7f050010;
+        public static final int cancel=0x7f05002c;
         public static final int clnum=0x7f05001c;
         public static final int cltype=0x7f05001d;
         public static final int contact=0x7f050011;
@@ -149,6 +159,9 @@ containing a value of this type.
         /**  数据操作 
          */
         public static final int dataoperator=0x7f05000e;
+        /**  调试 
+         */
+        public static final int debugcase=0x7f050024;
         public static final int defaultnums=0x7f05001f;
         public static final int delete=0x7f050014;
         public static final int deletekey=0x7f05000f;
@@ -160,13 +173,18 @@ containing a value of this type.
         /**  关于手机 
          */
         public static final int information=0x7f050007;
+        public static final int inputmodule=0x7f050029;
+        public static final int inputstep=0x7f05002a;
+        public static final int inputtype=0x7f050028;
         public static final int list=0x7f050013;
         public static final int message=0x7f050015;
+        public static final int module=0x7f050026;
         public static final int msmcon=0x7f050017;
         public static final int msmcount=0x7f050019;
         public static final int msmdeltail=0x7f050018;
         public static final int msmnum=0x7f050016;
         public static final int number=0x7f05001b;
+        public static final int one=0x7f050012;
         public static final int password=0x7f050022;
         public static final int phonemodel=0x7f050008;
         public static final int release=0x7f050009;
@@ -175,8 +193,10 @@ containing a value of this type.
         public static final int serialno=0x7f05000a;
         public static final int start=0x7f050004;
         public static final int starttomonite=0x7f050023;
-        public static final int sure=0x7f050012;
+        public static final int step=0x7f050027;
+        public static final int sure=0x7f05002b;
         public static final int tochoosewifi=0x7f050021;
+        public static final int type=0x7f050025;
         /**  wifi监听 
          */
         public static final int wifiMonitor=0x7f050020;
