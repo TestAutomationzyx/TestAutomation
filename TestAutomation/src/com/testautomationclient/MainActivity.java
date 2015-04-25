@@ -111,6 +111,8 @@ public class MainActivity extends Activity {
 					wifiMonitor();
 				}else if(titles[index].equals("调试")){
 					debugCase();
+				}else if(titles[index].equals("添加更多")){
+					more();
 				}else
 					moduleDialog(index);
 			}
@@ -245,5 +247,10 @@ public class MainActivity extends Activity {
 	protected void debugCase() {
 		Intent intent = new Intent(MainActivity.this, DebugCase.class);
 		startActivity(intent);
+	}
+	
+	protected void more() {
+		Intent intent = new Intent(MainActivity.this, More.class);
+		startService(intent);
 	}
 }

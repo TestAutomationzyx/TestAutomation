@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/more_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/more_icon"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:drawableLeft="@drawable/actions_about"
+        android:gravity="center_vertical"
+        android:text="@string/more"
+        android:textSize="@dimen/bigtitle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/orange"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/padding" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/txt_getactivity"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/getacticity"
+                android:textColor="@color/LightPink"
+                android:textSize="@dimen/information_font" />
+
+            <TextView
+                android:id="@+id/bt_sureactivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sureactivity"
+                android:textSize="@dimen/information_font" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/txt_step"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/morestep"
+                android:textColor="@color/LightPink"
+                android:textSize="@dimen/information_font" />
+
+            <TextView
+                android:id="@+id/bt_showstep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fadeScrollbars="false"
+                android:lines="4"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+                android:text="@string/addstep"
+                android:textSize="@dimen/information_font" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/txt_result"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/expectedresult"
+                android:textColor="@color/LightPink"
+                android:textSize="@dimen/information_font" />
+
+            <TextView
+                android:id="@+id/bt_showresult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/setexpectedresult"
+                android:textSize="@dimen/information_font" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/more_sure"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="180dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button"
+                android:text="@string/sure"
+                android:textColor="@color/White"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -26,7 +26,8 @@ public class ActivityName {
 	// T
 	// U
 	// V
-	public static String VIDEOWINDOWACTIVITY = "com.meizu.media.video/com.meizu.media.video.player.ui.VideoWindowActivity";
+	public static String VIDEOMAIN = "com.meizu.media.video/com.meizu.media.video.VideoMainActivity";
+	public static String VIDEOWINDOW = "com.meizu.media.video/com.meizu.media.video.player.ui.VideoWindowActivity";
 	// W
 	// X
 	// Y
