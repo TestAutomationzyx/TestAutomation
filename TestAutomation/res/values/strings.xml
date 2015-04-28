@@ -65,6 +65,7 @@
     <string name="addstep">添加操作步骤</string>
     <string name="expectedresult">预期结果：</string>
     <string name="setexpectedresult">设置预期结果</string>
+    <string name="moretimes">执行次数：</string>
     
     <!-- 颜色 -->
     <color name="transparent">#55ff</color>

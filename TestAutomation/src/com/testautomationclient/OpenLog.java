@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import android.content.Context;
 import android.content.Intent;
 
-import com.floatingreceiver.LogFloatingReceiver;
+import com.brocastreceiver.LogFloatingReceiver;
 
 public class OpenLog {
 

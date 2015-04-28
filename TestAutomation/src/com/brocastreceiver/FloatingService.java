@@ -1,4 +1,4 @@
-package com.floatingreceiver;
+package com.brocastreceiver;
 
 import android.app.Service;
 import android.content.Intent;

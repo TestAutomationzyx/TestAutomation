@@ -59,10 +59,11 @@
             android:theme="@style/MyDialog">           
         </activity>
         <service android:name=".More"></service>
-        <service android:name="com.floatingreceiver.FloatingService"></service>
-        <service android:name="com.floatingreceiver.StepFloatingReceiver" android:process="com.floatingreceiver.step"></service>
-        <service android:name="com.floatingreceiver.LogFloatingReceiver" android:process="com.floatingreceiver.log"></service>
-        <service android:name="com.floatingreceiver.WifiFloatingReceiver" android:process="com.floatingreceiver.wifi"></service>
+        <service android:name="com.brocastreceiver.FloatingService"></service>
+        <service android:name="com.brocastreceiver.LogCatReceiver" android:process="com.brocastreceiver.errorlog"></service>
+        <service android:name="com.brocastreceiver.StepFloatingReceiver" android:process="com.brocastreceiver.step"></service>
+        <service android:name="com.brocastreceiver.LogFloatingReceiver" android:process="com.brocastreceiver.log"></service>
+        <service android:name="com.brocastreceiver.WifiFloatingReceiver" android:process="com.brocastreceiver.wifi"></service>
         </application>
 
 </manifest>

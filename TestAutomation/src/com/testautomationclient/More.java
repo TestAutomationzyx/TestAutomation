@@ -1,6 +1,7 @@
 package com.testautomationclient;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
@@ -10,11 +11,16 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.testautomationservice.AutoTool;
 
 public class More extends Service {
 
@@ -27,12 +33,21 @@ public class More extends Service {
 	WindowManager mWindowManager;
 	
 	TextView more_icon,activity,step,result,setActivity,setStep,setResult;
+	Button sureButton;
+	EditText tEditText;
+	
+	Context context;
+	AutoTool MyAutoTool;
+	
+	int TIMES;
 	
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
 		createView();
+		context = getApplicationContext();
+		MyAutoTool = new AutoTool(context,false);
 	}
 
 	@Override
@@ -86,14 +101,12 @@ public class More extends Service {
         mWindowManager.addView(mFloatLayout, wmParams);
         
         more_icon = (TextView) mFloatLayout.findViewById(R.id.more_icon);
-//        activity = (TextView) mFloatLayout.findViewById(R.id.txt_getactivity);
-//        step = (TextView) mFloatLayout.findViewById(R.id.txt_step);
-//        result = (TextView) mFloatLayout.findViewById(R.id.txt_result);
         
         setActivity = (TextView) mFloatLayout.findViewById(R.id.bt_sureactivity);
         setStep = (TextView) mFloatLayout.findViewById(R.id.bt_showstep);
         setResult = (TextView) mFloatLayout.findViewById(R.id.bt_showresult);
-		
+		sureButton = (Button) mFloatLayout.findViewById(R.id.more_sure);
+		tEditText = (EditText) mFloatLayout.findViewById(R.id.moretimes);
   
         more_icon.setMovementMethod(LinkMovementMethod.getInstance());
         more_icon.setOnTouchListener(new OnTouchListener() {
@@ -113,10 +126,49 @@ public class More extends Service {
 				return false;
 			}
 		});
-        mFloatLayout.measure(View.MeasureSpec.makeMeasureSpec(0,
-				View.MeasureSpec.UNSPECIFIED), View.MeasureSpec
-				.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        
+        setActivity.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				setActivity.setText(MyAutoTool.getCurrentActivity());				
+			}
+		});
+        
+        setStep.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+        
+        setResult.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+        
+        sureButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				method();				
+			}
+		});
+//        mFloatLayout.measure(View.MeasureSpec.makeMeasureSpec(0,
+//				View.MeasureSpec.UNSPECIFIED), View.MeasureSpec
+//				.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
        
+	}
+
+	protected void method() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

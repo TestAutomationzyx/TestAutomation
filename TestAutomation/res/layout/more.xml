@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/more_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="@dimen/more_width"
+    android:layout_height="wrap_content"
     android:background="@color/transparent"
     android:orientation="vertical" >
 
@@ -37,8 +37,13 @@
 
             <TextView
                 android:id="@+id/bt_sureactivity"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
                 android:text="@string/sureactivity"
                 android:textSize="@dimen/information_font" />
         </LinearLayout>
@@ -87,6 +92,30 @@
                 android:layout_height="wrap_content"
                 android:text="@string/setexpectedresult"
                 android:textSize="@dimen/information_font" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:paddingRight="50dp" >
+            <TextView
+                android:id="@+id/txt_times"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/moretimes"
+                android:textColor="@color/LightPink"
+                android:textSize="@dimen/information_font" />
+            
+            <EditText
+            android:id="@+id/moretimes"
+            android:layout_width="0dip"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="number"
+            android:text="@string/defaultnums"/>
         </LinearLayout>
 
         <LinearLayout

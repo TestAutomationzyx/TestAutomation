@@ -23,7 +23,7 @@ public class Setting {
 
 	public Setting(Context context) {
 		this.context = context;
-		MyAutoTool = new AutoTool(context);
+		MyAutoTool = new AutoTool(context,true);
 		initial();
 	}
 

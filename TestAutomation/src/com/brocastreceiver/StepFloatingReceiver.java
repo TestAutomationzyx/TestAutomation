@@ -1,4 +1,4 @@
-package com.floatingreceiver;
+package com.brocastreceiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

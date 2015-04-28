@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import com.floatingreceiver.WifiFloatingReceiver;
+import com.brocastreceiver.WifiFloatingReceiver;
 
 import android.app.Activity;
 import android.content.Context;

@@ -26,13 +26,14 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.telephony.TelephonyManager;
 
+import com.brocastreceiver.LogCatReceiver;
+import com.brocastreceiver.StepFloatingReceiver;
 import com.element.ActivityName;
 import com.element.AdbShell;
 import com.element.AndroidKeyCode;
 import com.element.Position;
 import com.element.Position.Element;
 import com.element.Position.ElementAttribs;
-import com.floatingreceiver.StepFloatingReceiver;
 import com.utils.UIDump;
 
 @SuppressLint("SimpleDateFormat")
@@ -45,18 +46,22 @@ public class AutoTool implements ToolApi {
 	TelephonyManager telephonyManager;
 	WifiManager wifiManager;
 	int stepNum=1;
+	long stepTimes=0,allTimes=0;
+	String errorTime;
 	String sdcardPath = Environment.getExternalStorageDirectory().getPath();
 	String reportPath = sdcardPath+"/TestAutomation/report";
 
-	public AutoTool(Context context) {
+	public AutoTool(Context context,boolean isTotest) {
 		this.context = context;
-		Intent sIntent = new Intent(context, StepFloatingReceiver.class);
-		context.startService(sIntent);
+		if(isTotest){
+			Intent sIntent = new Intent(context, StepFloatingReceiver.class);
+			context.startService(sIntent);
+			Intent lIntent = new Intent(context, LogCatReceiver.class);
+			context.startService(lIntent);
+		}
 		adbTool = new AdbShell();
 		sendKeyCode(AndroidKeyCode.HOME);
 		position = new Position();
-		telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-		wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 	}
 
 	public String adbShell(String cmd) {
@@ -184,11 +189,13 @@ public class AutoTool implements ToolApi {
 
 	@Override
 	public boolean hasSIMCard() {
+		telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 		return telephonyManager.getSimState()!=TelephonyManager.SIM_STATE_ABSENT;
 	}
 
 	@Override
 	public void operateWifi(boolean open) {
+		wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 		wifiManager.setWifiEnabled(open);
 	}
 
@@ -250,10 +257,7 @@ public class AutoTool implements ToolApi {
 	
 	@Override
 	public String screenShot(String name) {
-		long currentTime = System.currentTimeMillis();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-		Date date = new Date(currentTime);
-		String image = name+ "_" + formatter.format(date) + ".png";
+		String image = name+ "_" + errorTime + ".png";
 		adbTool.adbshell("screencap -p /sdcard/TestAutomation/image/" + image);
 		return image;
 	}
@@ -354,6 +358,7 @@ public class AutoTool implements ToolApi {
 
 	@Override
 	public String getSimOperator() {
+		telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 		if(telephonyManager.getSimState()==TelephonyManager.SIM_STATE_READY)
 			return telephonyManager.getSimOperatorName();
 		return null;
@@ -361,18 +366,20 @@ public class AutoTool implements ToolApi {
 
 	@Override
 	public String toStep(String step) {
-		Intent mIntent = new Intent("com.floatingreceiver.StepFloatingReceiver");
+		Intent mIntent = new Intent("com.brocastreceiver.StepFloatingReceiver");
 		mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		mIntent.putExtra("step", stepNum+"."+step);
 		mIntent.putExtra("result", "");
 		mIntent.setAction("stepFloating");
 		context.sendBroadcast(mIntent);	
+		stepTimes = System.currentTimeMillis();
 		return stepNum+"."+step;
 	}
 
 	@Override
 	public boolean toResult(boolean result) {
-		Intent mIntent = new Intent("com.floatingreceiver.StepFloatingReceiver");
+		stepTimes = System.currentTimeMillis()-stepTimes;
+		Intent mIntent = new Intent("com.brocastreceiver.StepFloatingReceiver");
 		mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		mIntent.putExtra("step", "");
 		mIntent.putExtra("result", String.valueOf(result));
@@ -401,10 +408,22 @@ public class AutoTool implements ToolApi {
 			e.printStackTrace();
 		}
 		String picture = "";
-		if (!result)
-			picture = screenShot("errors");
+		errorTime="notError";
+		if (!result){
+			long currentTime = System.currentTimeMillis();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+			Date date = new Date(currentTime);
+			errorTime =formatter.format(date);
+			picture = screenShot("errors");	
+		}	
+		Intent mIntent = new Intent("com.brocastreceiver.LogCatReceiver");
+		mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		mIntent.putExtra("errorTime", errorTime);
+		mIntent.setAction("endCase");
+		context.sendBroadcast(mIntent);	
+		
 		PrintWriter pw = new PrintWriter(fw);
-		pw.println(step + "#" + result + "#" + picture);
+		pw.println(step + "#" + result + "#" + stepTimes/1000 + "s#" + picture);
 		pw.flush();
 		try {
 			fw.flush();

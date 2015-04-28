@@ -26,7 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.floatingreceiver.FloatingService;
+import com.brocastreceiver.FloatingService;
 import com.testautomationclient.MyGridLayout.GridAdatper;
 import com.testautomationclient.MyGridLayout.OnItemClickListener;
 import com.testcase.CaseItems;

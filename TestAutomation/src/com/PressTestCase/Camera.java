@@ -23,7 +23,7 @@ public class Camera {
 	}
 	public Camera(Context context){
 		this.context = context;
-		MyAutoTool = new AutoTool(context);
+		MyAutoTool = new AutoTool(context,true);
 		initial();
 	}
 	

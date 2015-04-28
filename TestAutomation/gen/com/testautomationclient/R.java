@@ -55,6 +55,7 @@ containing a value of this type.
         public static final int dialog_width=0x7f040004;
         public static final int information_font=0x7f040009;
         public static final int lineSpacingExtra=0x7f040008;
+        public static final int more_width=0x7f04000a;
         public static final int padding=0x7f040007;
     }
     public static final class drawable {
@@ -79,9 +80,9 @@ containing a value of this type.
         public static final int wifi=0x7f020012;
     }
     public static final class id {
-        public static final int SSIDpassword=0x7f090036;
-        public static final int SSIDspinner=0x7f090035;
-        public static final int action_settings=0x7f090038;
+        public static final int SSIDpassword=0x7f090038;
+        public static final int SSIDspinner=0x7f090037;
+        public static final int action_settings=0x7f09003a;
         public static final int bt_showresult=0x7f09002d;
         public static final int bt_showstep=0x7f09002b;
         public static final int bt_sureactivity=0x7f090029;
@@ -99,7 +100,7 @@ containing a value of this type.
         public static final int ctnumberet=0x7f09000e;
         public static final int ctphoneet=0x7f09000d;
         public static final int ctsure=0x7f09000f;
-        public static final int dbtc_sure=0x7f090034;
+        public static final int dbtc_sure=0x7f090036;
         public static final int deletekey=0x7f090012;
         public static final int float_id=0x7f090018;
         public static final int imei=0x7f09001c;
@@ -108,7 +109,8 @@ containing a value of this type.
         public static final int message=0x7f090015;
         public static final int more_icon=0x7f090027;
         public static final int more_layout=0x7f090026;
-        public static final int more_sure=0x7f09002e;
+        public static final int more_sure=0x7f090030;
+        public static final int moretimes=0x7f09002f;
         public static final int msmconetet=0x7f090021;
         public static final int msmdelete=0x7f090025;
         public static final int msmlist=0x7f090024;
@@ -126,16 +128,17 @@ containing a value of this type.
         public static final int textView1=0x7f090019;
         public static final int tv=0x7f090002;
         public static final int txt_getactivity=0x7f090028;
-        public static final int txt_module=0x7f090031;
+        public static final int txt_module=0x7f090033;
         public static final int txt_result=0x7f09002c;
-        public static final int txt_showmodule=0x7f090032;
-        public static final int txt_showstep=0x7f090033;
-        public static final int txt_showtype=0x7f090030;
+        public static final int txt_showmodule=0x7f090034;
+        public static final int txt_showstep=0x7f090035;
+        public static final int txt_showtype=0x7f090032;
         public static final int txt_step=0x7f09002a;
-        public static final int txt_type=0x7f09002f;
+        public static final int txt_times=0x7f09002e;
+        public static final int txt_type=0x7f090031;
         public static final int typespinner=0x7f090007;
         public static final int viewpager=0x7f090017;
-        public static final int wifisure=0x7f090037;
+        public static final int wifisure=0x7f090039;
     }
     public static final class layout {
         public static final int actions_item=0x7f030000;
@@ -195,6 +198,7 @@ containing a value of this type.
          */
         public static final int more=0x7f05002d;
         public static final int morestep=0x7f050030;
+        public static final int moretimes=0x7f050034;
         public static final int msmcon=0x7f050017;
         public static final int msmcount=0x7f050019;
         public static final int msmdeltail=0x7f050018;

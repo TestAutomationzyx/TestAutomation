@@ -23,7 +23,7 @@ public class Calculator {
 	}
 	public Calculator(Context context){
 		this.context = context;
-		MyAutoTool = new AutoTool(context);
+		MyAutoTool = new AutoTool(context,true);
 		initial();
 	}
 	

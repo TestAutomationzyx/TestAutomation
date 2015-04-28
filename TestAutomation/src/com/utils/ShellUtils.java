@@ -153,9 +153,7 @@ public class ShellUtils {
 			}
 			os.writeBytes(COMMAND_EXIT);
 			os.flush();
-			Log.e("ShellUtils", "before waitfor");
 			result = process.waitFor();
-			Log.e("ShellUtils", "after waitfor");
 			// get command result
 			if (isNeedResultMsg) {
 				successMsg = new StringBuilder();
