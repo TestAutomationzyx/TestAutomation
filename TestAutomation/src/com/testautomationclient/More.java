@@ -33,7 +33,7 @@ public class More extends Service {
 	WindowManager mWindowManager;
 	
 	TextView more_icon,activity,step,result,setActivity,setStep,setResult;
-	Button sureButton;
+	Button sureButton,cancelButton;
 	EditText tEditText;
 	
 	Context context;
@@ -106,6 +106,7 @@ public class More extends Service {
         setStep = (TextView) mFloatLayout.findViewById(R.id.bt_showstep);
         setResult = (TextView) mFloatLayout.findViewById(R.id.bt_showresult);
 		sureButton = (Button) mFloatLayout.findViewById(R.id.more_sure);
+		cancelButton = (Button) mFloatLayout.findViewById(R.id.more_cancel);
 		tEditText = (EditText) mFloatLayout.findViewById(R.id.moretimes);
   
         more_icon.setMovementMethod(LinkMovementMethod.getInstance());
@@ -158,6 +159,18 @@ public class More extends Service {
 			@Override
 			public void onClick(View arg0) {
 				method();				
+			}
+		});
+        
+        cancelButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				stopSelf();			
+				Intent intent = new Intent();
+				intent.setClass(context, MainActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  
+				context.startActivity(intent);
 			}
 		});
 //        mFloatLayout.measure(View.MeasureSpec.makeMeasureSpec(0,

@@ -3,7 +3,7 @@
     android:id="@+id/more_layout"
     android:layout_width="@dimen/more_width"
     android:layout_height="wrap_content"
-    android:background="@color/transparent"
+    android:background="@color/deepGreen"
     android:orientation="vertical" >
 
     <TextView
@@ -129,10 +129,21 @@
             <Button
                 android:id="@+id/more_sure"
                 style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="180dp"
+                android:layout_width="80dp"
                 android:layout_height="40dp"
-                android:background="@drawable/button"
+                android:background="@drawable/button_sure"
                 android:text="@string/sure"
+                android:textColor="@color/White"
+                android:textSize="20sp" />
+            
+            <Button
+                android:id="@+id/more_cancel"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/button"
+                android:text="@string/cancel"
                 android:textColor="@color/White"
                 android:textSize="20sp" />
         </LinearLayout>

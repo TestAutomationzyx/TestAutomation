@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 /**
  * 自定义布局组件
  * 
- * @author zihao
- * 
  */
 public class MyGridLayout extends ViewGroup {
 	int margin = 2;// 每个格子的水平和垂直间隔

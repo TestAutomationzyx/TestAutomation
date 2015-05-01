@@ -378,7 +378,7 @@ public class AutoTool implements ToolApi {
 
 	@Override
 	public boolean toResult(boolean result) {
-		stepTimes = System.currentTimeMillis()-stepTimes;
+		stepTimes = System.currentTimeMillis() -stepTimes;
 		Intent mIntent = new Intent("com.brocastreceiver.StepFloatingReceiver");
 		mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		mIntent.putExtra("step", "");

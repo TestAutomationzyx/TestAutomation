@@ -12,7 +12,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-//è§£ædumpfile.xmlæ–‡ä»¶
+//¶ÁÈ¡dumpfile.xmlÎÄ¼ş
 public class DumpReader extends DefaultHandler{
 	
 	private List<UIDump> dumps = null;

@@ -5,7 +5,7 @@ import java.util.List;
 import com.utils.UIDump;
 
 public interface ToolApi {
-
+	
 	String adbShell(String cmd);
 	void sendKeyCode(int keycode);
 	String getSimOperator();
@@ -49,4 +49,5 @@ public interface ToolApi {
 	boolean toResult(boolean result);
 	void addtoFile(String file, String step,boolean result);
 	List<UIDump> getUIDump(boolean fresh);
+	
 }

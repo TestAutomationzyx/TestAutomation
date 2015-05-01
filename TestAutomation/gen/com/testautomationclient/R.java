@@ -28,12 +28,13 @@ containing a value of this type.
     }
     public static final class color {
         public static final int Black=0x7f060002;
-        public static final int Brown=0x7f060008;
+        public static final int Brown=0x7f060009;
         public static final int LightBlue=0x7f060005;
         public static final int LightGreen=0x7f060007;
         public static final int LightPink=0x7f060004;
         public static final int LightPurple=0x7f060006;
         public static final int White=0x7f060001;
+        public static final int deepGreen=0x7f060008;
         public static final int orange=0x7f060003;
         /**  颜色 
          */
@@ -73,16 +74,17 @@ containing a value of this type.
         public static final int actions_start=0x7f02000b;
         public static final int actions_weibo=0x7f02000c;
         public static final int button=0x7f02000d;
-        public static final int delete=0x7f02000e;
-        public static final int floating=0x7f02000f;
-        public static final int ic_launcher=0x7f020010;
-        public static final int ic_launcher1=0x7f020011;
-        public static final int wifi=0x7f020012;
+        public static final int button_sure=0x7f02000e;
+        public static final int delete=0x7f02000f;
+        public static final int floating=0x7f020010;
+        public static final int ic_launcher=0x7f020011;
+        public static final int ic_launcher1=0x7f020012;
+        public static final int wifi=0x7f020013;
     }
     public static final class id {
-        public static final int SSIDpassword=0x7f090038;
-        public static final int SSIDspinner=0x7f090037;
-        public static final int action_settings=0x7f09003a;
+        public static final int SSIDpassword=0x7f090039;
+        public static final int SSIDspinner=0x7f090038;
+        public static final int action_settings=0x7f09003b;
         public static final int bt_showresult=0x7f09002d;
         public static final int bt_showstep=0x7f09002b;
         public static final int bt_sureactivity=0x7f090029;
@@ -100,13 +102,14 @@ containing a value of this type.
         public static final int ctnumberet=0x7f09000e;
         public static final int ctphoneet=0x7f09000d;
         public static final int ctsure=0x7f09000f;
-        public static final int dbtc_sure=0x7f090036;
+        public static final int dbtc_sure=0x7f090037;
         public static final int deletekey=0x7f090012;
         public static final int float_id=0x7f090018;
         public static final int imei=0x7f09001c;
         public static final int iv=0x7f090001;
         public static final int list=0x7f090005;
         public static final int message=0x7f090015;
+        public static final int more_cancel=0x7f090031;
         public static final int more_icon=0x7f090027;
         public static final int more_layout=0x7f090026;
         public static final int more_sure=0x7f090030;
@@ -128,17 +131,17 @@ containing a value of this type.
         public static final int textView1=0x7f090019;
         public static final int tv=0x7f090002;
         public static final int txt_getactivity=0x7f090028;
-        public static final int txt_module=0x7f090033;
+        public static final int txt_module=0x7f090034;
         public static final int txt_result=0x7f09002c;
-        public static final int txt_showmodule=0x7f090034;
-        public static final int txt_showstep=0x7f090035;
-        public static final int txt_showtype=0x7f090032;
+        public static final int txt_showmodule=0x7f090035;
+        public static final int txt_showstep=0x7f090036;
+        public static final int txt_showtype=0x7f090033;
         public static final int txt_step=0x7f09002a;
         public static final int txt_times=0x7f09002e;
-        public static final int txt_type=0x7f090031;
+        public static final int txt_type=0x7f090032;
         public static final int typespinner=0x7f090007;
         public static final int viewpager=0x7f090017;
-        public static final int wifisure=0x7f090039;
+        public static final int wifisure=0x7f09003a;
     }
     public static final class layout {
         public static final int actions_item=0x7f030000;

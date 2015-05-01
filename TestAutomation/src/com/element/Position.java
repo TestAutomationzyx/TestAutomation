@@ -217,8 +217,7 @@ public class Position {
 			element.setX(centerCoordsX);
 			element.setY(centerCoordsY);
 			
-			elements.add(element);
-			
+			elements.add(element);			
 		}
 		return elements;
 	}

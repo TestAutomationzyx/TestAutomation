@@ -76,6 +76,7 @@
     <color name="LightBlue">#B0E0E6</color>
     <color name="LightPurple">#E6E6FA</color>
     <color name="LightGreen">#C1FFC1</color>
+    <color name="deepGreen">#528B8B</color>
     <color name="Brown">#8B5F65</color>
 
 </resources>
