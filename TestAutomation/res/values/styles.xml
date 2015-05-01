@@ -36,7 +36,8 @@
         <!-- 点击空白部分activity不消失-->
         <item name="android:windowCloseOnTouchOutside">true</item>
         <!-- 默认行间距-->
-        <item name="android:lineSpacingExtra">@dimen/lineSpacingExtra</item>
+        <item name="android:lineSpacingExtra">@dimen/lineSpacingExtra</item> 
+        <item name="android:windowBackground">@drawable/filled_box</item>  
     </style>
 
 </resources>

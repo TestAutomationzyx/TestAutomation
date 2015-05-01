@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/transparent"
     android:orientation="vertical" >
 
     <TextView
@@ -12,6 +11,12 @@
         android:gravity="center_vertical"
         android:text="@string/debugcase"
         android:textSize="@dimen/bigtitle" />
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/line" >
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

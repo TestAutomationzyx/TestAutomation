@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/dialog_width"
     android:layout_height="match_parent"
-    android:background="@color/LightPurple"
+    android:background="@color/darkseagreen"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="100"
-            android:textColor="@color/LightPurple"
+            android:textColor="@color/darkseagreen"
             android:inputType="textPersonName" >
 
             <requestFocus />
@@ -50,7 +50,7 @@
             android:layout_weight="1"
             android:ems="100"
             android:inputType="phone"
-            android:textColor="@color/LightPurple"
+            android:textColor="@color/darkseagreen"
             android:paddingRight="100dp" />
     </LinearLayout>
 
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:textColor="@color/LightPurple"
+            android:textColor="@color/darkseagreen"
             android:inputType="number" />
     </LinearLayout>
     
@@ -88,9 +88,9 @@
             android:layout_width="70dp"
             android:layout_height="40dp"
             android:layout_marginRight="15dp"
-            android:background="@color/White"
+            android:background="@drawable/radius_button"
             android:text="@string/one"
-            android:textColor="@color/LightPurple"
+            android:textColor="@color/darkseagreen"
             style="?android:attr/buttonBarButtonStyle" />
 
         <Button
@@ -98,9 +98,9 @@
             android:layout_width="70dp"
             android:layout_height="40dp"
             android:layout_marginRight="15dp"
-            android:background="@color/White"
+            android:background="@drawable/radius_button"
             android:text="@string/list"
-            android:textColor="@color/LightPurple"
+            android:textColor="@color/darkseagreen"
             style="?android:attr/buttonBarButtonStyle" />
 
         <Button
@@ -108,9 +108,9 @@
             android:layout_width="110dp"
             android:layout_height="40dp"
             android:layout_marginRight="15dp"
-            android:background="@color/White"
+            android:background="@drawable/radius_button"
             android:text="@string/delete"
-            android:textColor="@color/LightPurple"
+            android:textColor="@color/darkseagreen"
             style="?android:attr/buttonBarButtonStyle" />
     </LinearLayout>
 

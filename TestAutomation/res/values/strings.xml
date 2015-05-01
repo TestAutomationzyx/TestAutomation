@@ -78,5 +78,10 @@
     <color name="LightGreen">#C1FFC1</color>
     <color name="deepGreen">#528B8B</color>
     <color name="Brown">#8B5F65</color>
+    <color name="darkseagreen">#20B2AA</color>
+    <color name="cadetblue">#4F94CD</color>
+    <color name="mediumseagreen">#3CB371</color>
+    <color name="line">#708090</color>
+    <color name="dialog">#00688B</color>
 
 </resources>

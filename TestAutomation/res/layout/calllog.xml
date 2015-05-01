@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/dialog_width"
     android:layout_height="wrap_content"
-    android:background="@color/LightPink"
+    android:background="@color/mediumseagreen"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -27,7 +27,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="phone"
-            android:textColor="@color/LightPink" >
+            android:textColor="@color/mediumseagreen" >
 
             <requestFocus />
         </EditText>
@@ -77,7 +77,7 @@
             android:ems="10"
             android:inputType="number"
             android:text="@string/defaultnums"
-            android:textColor="@color/LightPink" />
+            android:textColor="@color/mediumseagreen" />
     </LinearLayout>
 
     <LinearLayout
@@ -93,9 +93,9 @@
             android:layout_width="70dp"
             android:layout_height="40dp"
             android:layout_marginRight="15dp"
-            android:background="@color/White"
+            android:background="@drawable/radius_button"
             android:text="@string/one"
-            android:textColor="@color/LightPink"
+            android:textColor="@color/mediumseagreen"
             style="?android:attr/buttonBarButtonStyle" />
 
         <Button
@@ -103,9 +103,9 @@
             android:layout_width="70dp"
             android:layout_height="40dp"
             android:layout_marginRight="15dp"
-            android:background="@color/White"
+            android:background="@drawable/radius_button"
             android:text="@string/list"
-            android:textColor="@color/LightPink"
+            android:textColor="@color/mediumseagreen"
             style="?android:attr/buttonBarButtonStyle" />
 
         <Button
@@ -113,9 +113,9 @@
             android:layout_width="110dp"
             android:layout_height="40dp"
             android:layout_marginRight="15dp"
-            android:background="@color/White"
+            android:background="@drawable/radius_button"
             android:text="@string/delete"
-            android:textColor="@color/LightPink"
+            android:textColor="@color/mediumseagreen"
             style="?android:attr/buttonBarButtonStyle" />
     </LinearLayout>
 
