@@ -26,10 +26,10 @@ public class Position {
 	private File uiautomator_jar = new File("/data/local/tmp/UiAutomator.jar");
 	private String uiautomator_dump = "/data/local/tmp/dumpfile.xml";
 	
-	private Map<Integer, String> attrib = null;
-	private ArrayList<HashMap<Integer, String>> attribs = null;
-	private InputStream xml = null;
-	private List<UIDump> dumps = null;
+	private static Map<Integer, String> attrib = null;
+	private static ArrayList<HashMap<Integer, String>> attribs = null;
+	private static InputStream xml = null;
+	private static List<UIDump> dumps = null;
 	
 	public Position(){
 		temp = uiautomator_dump;
@@ -37,7 +37,7 @@ public class Position {
 		if (!dumpfile.exists())
 			ShellUtils.execCommand(new String[]{"touch " + temp,"chmod 777 "+temp}, true);
 		if(!uiautomator_jar.exists())
-			ShellUtils.execCommand(new String[]{"cp /sdcard/TestAutomation/dump/UiAutomator.jar /data/local/tmp/"}, true);	
+			ShellUtils.execCommand(new String[]{"cp /sdcard/TestAutomation/dump/UiAutomator.jar /data/local/tmp/","chmod 777 "+uiautomator_jar}, true);	
 	}
 	
 	//获取设备当前界面的控件信息，并解析dumpfile.xml文件
@@ -167,9 +167,7 @@ public class Position {
 		return this.findElements(ElementAttribs.CHECKED, clickable,fresh);
 	}
 	public Element findElement(int att, String str,boolean fresh){
-		if(fresh)
-			uidump();
-		CharSequence input = getAttrib(att, str).get(ElementAttribs.BOUNDS);
+		CharSequence input = getAttrib(att, str,fresh).get(ElementAttribs.BOUNDS);
 		if (input == null)
 			return null;//throw new RuntimeException("未在当前界面找到元素(" + str + ")");
 		Matcher mat = pattern.matcher(input);
@@ -194,10 +192,8 @@ public class Position {
 	}
 	
 	public ArrayList<Element> findElements(int att, String str,boolean fresh){
-		if(fresh)
-			uidump();
 		ArrayList<Element> elements = new ArrayList<Element>();
-		ArrayList<HashMap<Integer, String>> attribs = getAttribs(att, str);
+		ArrayList<HashMap<Integer, String>> attribs = getAttribs(att, str,fresh);
 		
 		for(HashMap<Integer, String> hashMap:attribs){
 			Matcher mat = pattern.matcher((String)hashMap.get(ElementAttribs.BOUNDS));
@@ -224,7 +220,9 @@ public class Position {
 	
 	// 获取单个元素属性值集合
 	@SuppressLint("UseSparseArrays")
-	private HashMap<Integer, String> getAttrib(int att, String str) {
+	public HashMap<Integer, String> getAttrib(int att, String str,boolean fresh) {
+		if(fresh)
+			uidump();
 		attrib = new HashMap<Integer, String>();
 		for(UIDump dump : dumps){
 			Log.e("------->", dump.toString());
@@ -274,7 +272,9 @@ public class Position {
 
 	// 获取多个元素的属性值集合
 	@SuppressLint("UseSparseArrays")
-	private ArrayList<HashMap<Integer, String>> getAttribs(int att, String str) {
+	public ArrayList<HashMap<Integer, String>> getAttribs(int att, String str,boolean fresh) {
+		if(fresh)
+			uidump();
 		HashMap<Integer, String> a = null;
 		attribs = new ArrayList<HashMap<Integer, String>>();
 		for(UIDump dump : dumps){

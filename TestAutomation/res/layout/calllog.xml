@@ -11,7 +11,7 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:paddingRight="50dp"
-        android:paddingTop="50dp" >
+        android:paddingTop="25dp" >
 
         <TextView
             android:layout_width="80dp"
@@ -86,11 +86,11 @@
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:orientation="horizontal"
-        android:paddingLeft="40dp" >
+        android:paddingLeft="20dp" >
 
         <Button
             android:id="@+id/clsure"
-            android:layout_width="70dp"
+            android:layout_width="65dp"
             android:layout_height="40dp"
             android:layout_marginRight="15dp"
             android:background="@drawable/radius_button"

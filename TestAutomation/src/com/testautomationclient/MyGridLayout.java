@@ -13,6 +13,7 @@ import android.view.ViewGroup;
  * 自定义布局组件
  * 
  */
+@SuppressLint("Recycle")
 public class MyGridLayout extends ViewGroup {
 	int margin = 2;// 每个格子的水平和垂直间隔
 	int colums = 2;
@@ -20,12 +21,10 @@ public class MyGridLayout extends ViewGroup {
 
 	GridAdatper adapter;
 
-	@SuppressLint("Recycle")
 	public MyGridLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		if (attrs != null) {
-			TypedArray a = getContext().obtainStyledAttributes(attrs,
-					R.styleable.MyGridLayout);
+			TypedArray a = getContext().obtainStyledAttributes(attrs,R.styleable.MyGridLayout);
 			colums = a.getInteger(R.styleable.MyGridLayout_numColumns, 2);
 			margin = (int) a.getInteger(R.styleable.MyGridLayout_itemMargin, 2);
 		}

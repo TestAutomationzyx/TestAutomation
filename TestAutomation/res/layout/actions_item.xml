@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/Itemicon"
-        android:src="@drawable/actions_booktag" />
+        android:src="@drawable/actions_basic" />
 
     <TextView
         android:id="@+id/tv"

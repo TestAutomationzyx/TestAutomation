@@ -19,12 +19,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.brocastreceiver.FloatingService;
 import com.testautomationclient.MyGridLayout.GridAdatper;
@@ -48,22 +48,15 @@ public class MainActivity extends Activity {
 	WindowManager.LayoutParams wmParams = new WindowManager.LayoutParams();
 	WindowManager mWindowManager;
 
-	ImageView start,stop;
+	ImageView start,upload;
 	MyGridLayout grid;
-	int[] srcs = { R.drawable.actions_booktag, R.drawable.actions_comment,
-			R.drawable.actions_order, R.drawable.actions_account,
-			R.drawable.actions_cent, R.drawable.actions_weibo,
-			R.drawable.actions_feedback, R.drawable.actions_about,
-			R.drawable.actions_booktag, R.drawable.actions_comment,
-			R.drawable.actions_order, R.drawable.actions_account,
-			R.drawable.actions_cent, R.drawable.actions_weibo,
-			R.drawable.actions_feedback, R.drawable.actions_about,
-			R.drawable.actions_about };
-	
-	String titles[] = { "基本", "系统", "压力", "界面", "适配", "语言", "性能", "调试", "搜索",
-			"关于手机", "数据操作", "开启log工具", "wifi监听", "Monkey测试", "开启权限", "添加更多" };
-
-	
+	int[] srcs = { R.drawable.actions_basic, R.drawable.actions_pressure,
+			R.drawable.actions_debug, R.drawable.actions_info,
+			R.drawable.actions_data, R.drawable.actions_log,
+			R.drawable.actions_wifi, R.drawable.actions_open,
+			R.drawable.actions_more, };
+	//"系统","界面", "适配", "语言", "性能","此处有空",, "此处有空"
+	String titles[] = { "基本", "压力", "调试", "关于手机", "数据操作", "开启log工具", "wifi监听", "开启权限","添加更多" };	
 	
 	CharSequence button[] = { "确定", "取消" };
 
@@ -74,7 +67,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		this.context = getApplicationContext();
 		copy();	
-		makeImageFile();
+		createImageFile();
 		
 		grid = (MyGridLayout) findViewById(R.id.list);
 		grid.setGridAdapter(new GridAdatper() {
@@ -119,16 +112,8 @@ public class MainActivity extends Activity {
 
 		});
 		
-		stop = (ImageView) findViewById(R.id.stop);
-		stop.setOnLongClickListener(new OnLongClickListener() {
-			
-			@Override
-			public boolean onLongClick(View arg0) {
-				Intent intent = new Intent(MainActivity.this, OpenLog.class);
-				stopService(intent);
-				return false;
-			}
-		});
+		upload = (ImageView) findViewById(R.id.upload);
+		
 	}
 
 
@@ -138,9 +123,10 @@ public class MainActivity extends Activity {
 		finish();
 	}
 	
-	public void stop(View view){
-		Intent intent = new Intent(MainActivity.this, FloatingService.class);
-		stopService(intent);
+	public void upload(View view){
+
+		Toast toast = Toast.makeText(context, "上传成功!", Toast.LENGTH_LONG);
+		toast.show();
 	}
 
 	private void copy() {
@@ -165,7 +151,7 @@ public class MainActivity extends Activity {
 		}
 	}
 	
-	private void makeImageFile(){
+	private void createImageFile(){
 		File file = new File(imagePath);
 		if (!file.exists()) {
 			file.mkdirs();
@@ -236,7 +222,7 @@ public class MainActivity extends Activity {
 	}
 	
 	protected void openLog() {
-//		OpenLog openLog = new OpenLog(context);
+		OpenLog openLog = new OpenLog(context);
 	}
 	
 	protected void wifiMonitor() {

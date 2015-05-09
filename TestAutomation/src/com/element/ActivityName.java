@@ -4,7 +4,7 @@ public class ActivityName {
 	// A
 	// B
 	// C
-
+	public static String CAMERA = "com.meizu.media.camera/com.meizu.media.camera.CameraLauncher";
 	// D
 	// E
 	// F

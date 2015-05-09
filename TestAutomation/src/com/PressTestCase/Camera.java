@@ -6,7 +6,8 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 
-import com.element.Position.ElementAttribs;
+import com.element.ActivityName;
+import com.element.Position.Element;
 import com.testautomationservice.AutoTool;
 
 public class Camera {
@@ -21,67 +22,100 @@ public class Camera {
 	public Camera(){
 		setCaselist();
 	}
+	
 	public Camera(Context context){
 		this.context = context;
 		MyAutoTool = new AutoTool(context,true);
-		initial();
-	}
-	
-	public void method(){
-		gotoCallCase();
-		returnHomeCase();
-		gotoWeiboCase();		
+		start();
 	}
 	
 	public void setCaselist(){
-		caselist = Arrays.asList("拍照200次","开启美颜模式","切换拍照模式");
+		caselist = Arrays.asList("进入相机","拍照200次","开启/关闭闪光灯100次","开启/关闭特效50次");
 	}
 
 	public List<String> getCaselist() {
 		return caselist;
 	}
-
-	private void initial() {
-		setCaselist();
-		MyAutoTool.returnHome();
-	}
-
-	private void returnHomeCase() {
-		step = MyAutoTool.toStep("返回桌面");
-		MyAutoTool.returnHome();
-		result = MyAutoTool.toResult(true);
-		MyAutoTool.addtoFile(TAG,step, result);		
-	}
-
-	private void gotoWeiboCase() {
-		step = MyAutoTool.toStep("从桌面进入微博");
-		MyAutoTool.startatHome("微博");
-		result = MyAutoTool.toResult(false);
-		MyAutoTool.addtoFile(TAG,step, result);		
-	}
-
-	private void gotoCallCase() {
-		step = MyAutoTool.toStep("进入电话");
-		MyAutoTool.touch("电话", ElementAttribs.TEXT, 0, true, 0);
-		MyAutoTool.sleep(1000);           
-		result = MyAutoTool.toResult(false);
-		MyAutoTool.addtoFile(TAG,step, result);		
+	
+	public void method(){
+		gotoCamera();
+		shut200();	
+		flash100();
+		special50();
 	}
 	
 	public void debugCase(String casename){
 		switch (casename) {
+		case "进入相机":
+			gotoCamera();
+			break;
 		case "拍照200次":
-			gotoCallCase();
+			shut200();
 			break;
-		case "开启美颜模式":
-			returnHomeCase();
+		case "开启/关闭闪光灯100次":
+			flash100();
 			break;
-		case "切换拍照模式":
-			gotoWeiboCase();
+		case "开启/关闭特效50次":
+			special50();
 			break;
 		default:
 			break;
 		}
 	}
+
+	private void start() {
+		setCaselist();
+		MyAutoTool.returnHome();
+	}
 	
+	//----------------case--------------//
+
+	private void gotoCamera() {
+		step = MyAutoTool.toStep("从桌面进入相机\n");
+		MyAutoTool.startatHome("相机");	
+		result = MyAutoTool.toResult(MyAutoTool.hasFocus(ActivityName.CAMERA));
+		MyAutoTool.addtoFile(TAG,step, result);		
+	}
+	
+	private void shut200() {
+		step = MyAutoTool.toStep("拍照200次\n");
+		startCamera();
+		MyAutoTool.waitforId("com.meizu.media.camera:id/shutter_btn", 1, 10*1000);
+		Element shutter = MyAutoTool.searchElementbyId("com.meizu.media.camera:id/shutter_btn", 0, true);
+		for(int i=0;i<200;i++){
+			step += MyAutoTool.toStep("第"+(i+1)+"次\t");
+			MyAutoTool.touch(shutter, 0);
+		}
+		result = MyAutoTool.toResult(MyAutoTool.hasFocus(ActivityName.CAMERA));
+		MyAutoTool.addtoFile(TAG,step, result);		
+	}
+	
+	private void flash100() {
+		step = MyAutoTool.toStep("开启/关闭闪光灯100次\n");
+		startCamera();
+		Element flash = MyAutoTool.searchElementbyId("com.meizu.media.camera:id/flashlight_control", 0, true);
+		for(int i=0;i<100;i++){
+			step += MyAutoTool.toStep("第"+(i+1)+"次\t");
+			MyAutoTool.touch(flash, 0);
+		}
+		result = MyAutoTool.toResult(MyAutoTool.hasFocus(ActivityName.CAMERA));
+		MyAutoTool.addtoFile(TAG,step, result);		
+	}
+	
+	private void special50(){
+		step = MyAutoTool.toStep("开启/关闭特效50次\n");
+		startCamera();
+		for(int i=0;i<50;i++){
+			step += MyAutoTool.toStep("第"+(i+1)+"次\t");
+			MyAutoTool.touchId("com.meizu.media.camera:id/filter_control", 0, i==0, 0);
+		}
+		result = MyAutoTool.toResult(MyAutoTool.hasFocus(ActivityName.CAMERA));
+		MyAutoTool.addtoFile(TAG,step, result);		
+	}
+	//---------------//
+	
+	private void startCamera(){
+		if(!MyAutoTool.hasFocus(ActivityName.CAMERA))
+			MyAutoTool.startActivity(ActivityName.CAMERA);
+	}
 }

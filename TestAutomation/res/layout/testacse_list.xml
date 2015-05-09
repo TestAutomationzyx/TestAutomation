@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="@dimen/dialog_width"
+    android:layout_height="@dimen/dialog_height"
     android:orientation="vertical" >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:drawableLeft="@drawable/actions_about"
+        android:layout_marginLeft="20dp"
+        android:drawableLeft="@drawable/actions_debug"
         android:gravity="center_vertical"
         android:text="@string/debugcase"
         android:textSize="@dimen/bigtitle" />
@@ -28,6 +29,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:orientation="horizontal" >
 
             <TextView
@@ -50,6 +52,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:orientation="horizontal" >
 
             <TextView
@@ -72,6 +75,7 @@
       <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:orientation="horizontal" >
 
             <TextView

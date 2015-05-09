@@ -10,7 +10,7 @@
         android:id="@+id/more_icon"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:drawableLeft="@drawable/actions_about"
+        android:drawableLeft="@drawable/actions_more"
         android:gravity="center_vertical"
         android:text="@string/more"
         android:textSize="@dimen/bigtitle" />

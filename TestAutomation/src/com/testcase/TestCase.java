@@ -11,13 +11,13 @@ public class TestCase {
 
 	Context context;
 	String TAG = "TestCase";
-	
-	public TestCase(Context context){
+
+	public TestCase(Context context) {
 		this.context = context;
 	}
-	
-	public void startCase(String type,List<String> module){
-		for(int i=0; i<module.size();i++){
+
+	public void startCase(String type, List<String> module) {
+		for (int i = 0; i < module.size(); i++) {
 			switch (type) {
 			case "»ù±¾":
 				new BasicCase(context, module.get(i));
@@ -31,4 +31,5 @@ public class TestCase {
 			}
 		}
 	}
+
 }

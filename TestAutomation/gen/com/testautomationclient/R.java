@@ -34,7 +34,12 @@ containing a value of this type.
         public static final int LightPink=0x7f060004;
         public static final int LightPurple=0x7f060006;
         public static final int White=0x7f060001;
+        public static final int cadetblue=0x7f06000b;
+        public static final int darkseagreen=0x7f06000a;
         public static final int deepGreen=0x7f060008;
+        public static final int dialog=0x7f06000e;
+        public static final int line=0x7f06000d;
+        public static final int mediumseagreen=0x7f06000c;
         public static final int orange=0x7f060003;
         /**  颜色 
          */
@@ -60,26 +65,32 @@ containing a value of this type.
         public static final int padding=0x7f040007;
     }
     public static final class drawable {
-        public static final int actions_about=0x7f020000;
-        public static final int actions_account=0x7f020001;
-        public static final int actions_booktag=0x7f020002;
-        public static final int actions_cent=0x7f020003;
-        public static final int actions_comment=0x7f020004;
-        public static final int actions_feedback=0x7f020005;
-        public static final int actions_html=0x7f020006;
+        public static final int actions_account=0x7f020000;
+        public static final int actions_basic=0x7f020001;
+        public static final int actions_cent=0x7f020002;
+        public static final int actions_data=0x7f020003;
+        public static final int actions_debug=0x7f020004;
+        public static final int actions_html=0x7f020005;
+        public static final int actions_info=0x7f020006;
         public static final int actions_item_bg_s=0x7f020007;
         public static final int actions_item_selector=0x7f020008;
-        public static final int actions_logo=0x7f020009;
-        public static final int actions_order=0x7f02000a;
-        public static final int actions_start=0x7f02000b;
-        public static final int actions_weibo=0x7f02000c;
-        public static final int button=0x7f02000d;
-        public static final int button_sure=0x7f02000e;
-        public static final int delete=0x7f02000f;
-        public static final int floating=0x7f020010;
-        public static final int ic_launcher=0x7f020011;
-        public static final int ic_launcher1=0x7f020012;
-        public static final int wifi=0x7f020013;
+        public static final int actions_log=0x7f020009;
+        public static final int actions_logo=0x7f02000a;
+        public static final int actions_more=0x7f02000b;
+        public static final int actions_open=0x7f02000c;
+        public static final int actions_pressure=0x7f02000d;
+        public static final int actions_start=0x7f02000e;
+        public static final int actions_weibo=0x7f02000f;
+        public static final int actions_wifi=0x7f020010;
+        public static final int button=0x7f020011;
+        public static final int button_sure=0x7f020012;
+        public static final int delete=0x7f020013;
+        public static final int filled_box=0x7f020014;
+        public static final int floating=0x7f020015;
+        public static final int ic_launcher=0x7f020016;
+        public static final int ic_launcher1=0x7f020017;
+        public static final int radius_button=0x7f020018;
+        public static final int wifi=0x7f020019;
     }
     public static final class id {
         public static final int SSIDpassword=0x7f090039;
@@ -126,7 +137,6 @@ containing a value of this type.
         public static final int sdk=0x7f09001e;
         public static final int serialno=0x7f09001b;
         public static final int start=0x7f090003;
-        public static final int stop=0x7f090004;
         public static final int tab=0x7f090013;
         public static final int textView1=0x7f090019;
         public static final int tv=0x7f090002;
@@ -140,6 +150,7 @@ containing a value of this type.
         public static final int txt_times=0x7f09002e;
         public static final int txt_type=0x7f090032;
         public static final int typespinner=0x7f090007;
+        public static final int upload=0x7f090004;
         public static final int viewpager=0x7f090017;
         public static final int wifisure=0x7f09003a;
     }

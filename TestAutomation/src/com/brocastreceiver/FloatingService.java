@@ -6,7 +6,6 @@ import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -32,7 +31,7 @@ public class FloatingService extends Service {
 	ImageView mFloatView;
 	TextView tv;
 	
-	private static final String TAG = "FloatingService";
+//	private  String TAG = "FloatingService";
 	
 	@Override
 	public void onCreate() 
@@ -87,15 +86,15 @@ public class FloatingService extends Service {
         //添加mFloatLayout
         mWindowManager.addView(mFloatLayout, wmParams);
         
-        Log.i(TAG, "mFloatLayout-->left" + mFloatLayout.getLeft());
-        Log.i(TAG, "mFloatLayout-->right" + mFloatLayout.getRight());
-        Log.i(TAG, "mFloatLayout-->top" + mFloatLayout.getTop());
-        Log.i(TAG, "mFloatLayout-->bottom" + mFloatLayout.getBottom());      
-        
+//        Log.i(TAG, "mFloatLayout-->left" + mFloatLayout.getLeft());
+//        Log.i(TAG, "mFloatLayout-->right" + mFloatLayout.getRight());
+//        Log.i(TAG, "mFloatLayout-->top" + mFloatLayout.getTop());
+//        Log.i(TAG, "mFloatLayout-->bottom" + mFloatLayout.getBottom());      
+//        
         //浮动窗口按钮
         mFloatView = (ImageView)mFloatLayout.findViewById(R.id.float_id);
         tv = (TextView) mFloatLayout.findViewById(R.id.textView1);
-		String string = "颜色和不透明度 (alpha) 值以十六进制表示法表示。任何一种颜色的值范围都是 0 到 255（00 到 ff）。对于 alpha，00 表示完全透明，ff 表示完全不透明。表达式顺序是“aabbggrr”，其中“aa=alpha”（00 到 ff）；“bb=blue”（00 到 ff）；“gg=green”（00 到 ff)；“rr=red”（00 到 ff）。例如，如果您希望对某叠加层应用不透明度为 50% 的蓝色，则应指定以下值：7fff0000";
+		String string = "测试即将开始，正在初始化数据，请耐心等候。。。。。。。。。。。。。。。。。。";
 		CharSequence charSequence = Html.fromHtml(string);
 		tv.setText(charSequence);
 		tv.setMovementMethod(LinkMovementMethod.getInstance());
@@ -103,8 +102,8 @@ public class FloatingService extends Service {
         mFloatLayout.measure(View.MeasureSpec.makeMeasureSpec(0,
 				View.MeasureSpec.UNSPECIFIED), View.MeasureSpec
 				.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        Log.i(TAG, "Width/2--->" + mFloatView.getMeasuredWidth()/2);
-        Log.i(TAG, "Height/2--->" + mFloatView.getMeasuredHeight()/2);
+//        Log.i(TAG, "Width/2--->" + mFloatView.getMeasuredWidth()/2);
+//        Log.i(TAG, "Height/2--->" + mFloatView.getMeasuredHeight()/2);
         //设置监听浮动窗口的触摸移动
         mFloatView.setOnTouchListener(new OnTouchListener() 
         {
@@ -116,13 +115,13 @@ public class FloatingService extends Service {
 				//getRawX是触摸位置相对于屏幕的坐标，getX是相对于按钮的坐标
 				wmParams.x = (int) event.getRawX() - mFloatView.getMeasuredWidth()/2;
 				//Log.i(TAG, "Width/2--->" + mFloatView.getMeasuredWidth()/2);
-				Log.i(TAG, "RawX" + event.getRawX());
-				Log.i(TAG, "X" + event.getX());
+//				Log.i(TAG, "RawX" + event.getRawX());
+//				Log.i(TAG, "X" + event.getX());
 				//25为状态栏的高度
 	            wmParams.y = (int) event.getRawY() - mFloatView.getMeasuredHeight()/2 - 25;
 	           // Log.i(TAG, "Width/2--->" + mFloatView.getMeasuredHeight()/2);
-	            Log.i(TAG, "RawY" + event.getRawY());
-	            Log.i(TAG, "Y" + event.getY());
+//	            Log.i(TAG, "RawY" + event.getRawY());
+//	            Log.i(TAG, "Y" + event.getY());
 	             //刷新
 	            mWindowManager.updateViewLayout(mFloatLayout, wmParams);
 				return false;

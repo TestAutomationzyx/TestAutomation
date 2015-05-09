@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.element.Position.ElementAttribs;
 import com.testautomationservice.AutoTool;
@@ -62,8 +63,10 @@ public class Phone {
 
 	private void gotoCallCase() {
 		step = MyAutoTool.toStep("进入电话");
-		MyAutoTool.touch("电话", ElementAttribs.TEXT, 0, true, 0);
-		MyAutoTool.sleep(1000);           
+		MyAutoTool.touchText("电话", 0, true, 0);
+		String aaa=MyAutoTool.getElementValuebyId("com.android.dialer:id/photo", 2, true, ElementAttribs.BOUNDS);
+		Log.e(TAG, "aaa=========="+aaa);
+		MyAutoTool.touchId("com.android.dialer:id/photo", 0, false, 0);
 		result = MyAutoTool.toResult(false);
 		MyAutoTool.addtoFile(TAG,step, result);		
 	}

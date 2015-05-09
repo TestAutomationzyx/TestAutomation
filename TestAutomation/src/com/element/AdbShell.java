@@ -165,7 +165,7 @@ public class AdbShell {
 	 */
 	public void sendKeyEvent(int keycode) {
 		ShellUtils.execCommand("input keyevent " + keycode, true);
-		sleep(500);
+		sleep(100);
 	}
 
 	/**
@@ -178,7 +178,7 @@ public class AdbShell {
 	 */
 	public void touch(int x, int y) {
 		ShellUtils.execCommand("input tap " + x + " " + y, true);
-		sleep(500);
+		sleep(100);
 	}
 
 	/**
@@ -191,7 +191,7 @@ public class AdbShell {
 		double[] coords = ratio(x, y);
 		ShellUtils
 				.execCommand("input tap " + coords[0] + " " + coords[1], true);
-		sleep(500);
+		sleep(100);
 	}
 
 	/**
@@ -201,8 +201,8 @@ public class AdbShell {
 	 *            元素对象
 	 */
 	public void touch(Element e) {
-		ShellUtils.execCommand("input tap " + e.getX() + " " + e.getY(), true);
-		sleep(500);
+		ShellUtils.execCommand("input tap " + e.getX() + " " + e.getY(), false);
+		sleep(100);
 	}
 
 	/**

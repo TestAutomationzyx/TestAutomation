@@ -5,7 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -45,7 +47,7 @@ public class AutoTool implements ToolApi {
 	ClipboardManager clipboardManager;
 	TelephonyManager telephonyManager;
 	WifiManager wifiManager;
-	int stepNum=1;
+	int stepNum=1,tempNum=1;
 	long stepTimes=0,allTimes=0;
 	String errorTime;
 	String sdcardPath = Environment.getExternalStorageDirectory().getPath();
@@ -74,8 +76,12 @@ public class AutoTool implements ToolApi {
 	}
 
 	@Override
-	public String getElementValuebyId(String id, int index, boolean fresh, String item) {
-		return null;
+	public String getElementValuebyId(String id, int index, boolean fresh, int attri) {
+			
+		ArrayList<HashMap<Integer, String>> data = position.getAttribs(ElementAttribs.RESOURCE_ID, id,fresh);
+		if (data.size()<=index)
+			return null;
+		return data.get(index).get(attri);
 	}
 	
 	@Override
@@ -116,7 +122,7 @@ public class AutoTool implements ToolApi {
 	@Override
 	public boolean touch(String e, int type, int index, boolean fresh, long times) {
 		List<Element> eList = position.findElements(type, e,fresh);
-		if(eList.size()<index)
+		if(eList.size()<=index)
 			return false;
 		else{
 			Element e1 = eList.get(index);
@@ -160,7 +166,7 @@ public class AutoTool implements ToolApi {
 		long startTimes = System.currentTimeMillis();
 		while ((System.currentTimeMillis() - startTimes) <= times) {
 			sleep(500);
-			if (position.findElementsById(id,true).get(index) != null) {
+			if (position.findElementsById(id,true).size()>index+1) {
 				return true;
 			}
 		}
@@ -372,7 +378,9 @@ public class AutoTool implements ToolApi {
 		mIntent.putExtra("result", "");
 		mIntent.setAction("stepFloating");
 		context.sendBroadcast(mIntent);	
-		stepTimes = System.currentTimeMillis();
+		if(stepNum==tempNum)
+			stepTimes = System.currentTimeMillis();
+		tempNum++;
 		return stepNum+"."+step;
 	}
 
@@ -386,6 +394,7 @@ public class AutoTool implements ToolApi {
 		mIntent.setAction("stepFloating");
 		context.sendBroadcast(mIntent);	
 		stepNum++;
+		tempNum = stepNum;
 		return result;
 	}
 
@@ -436,7 +445,7 @@ public class AutoTool implements ToolApi {
 
 	@Override
 	public void startatHome(String appname) {
-		returnHome();
+		sendKeyCode(AndroidKeyCode.HOME);
 		for(int i=0;i<10;i++){
 			if(waitforText(appname, 0, 0))
 				break;
@@ -451,4 +460,36 @@ public class AutoTool implements ToolApi {
 		touch(appname, ElementAttribs.TEXT, 0, false, 0);
 	}
 
+	@Override
+	public Element searchElementbyId(String id, int index, boolean fresh) {
+		ArrayList<Element> ids = new ArrayList<Element>();
+		ids = position.findElementsById(id,fresh);
+		if(ids.size()<index+1)
+			return null;
+		return ids.get(index);
+	}
+
+	@Override
+	public Element searchElementbyText(String text, int index, boolean fresh) {
+		ArrayList<Element> texts = new ArrayList<Element>();
+		texts = position.findElementsById(text,fresh);
+		if(texts.size()<index+1)
+			return null;
+		return texts.get(index);
+	}
+	
+	@Override
+	public String getScreenText(boolean fresh){
+		return getUIDump(fresh).toString();
+	}
+
+	@Override
+	public boolean touch(Element e, long times) {
+		if(e==null)
+			return false;
+		else{
+			touch(e.getX(), e.getY(), 0);
+			return true;
+		}
+	}
 }

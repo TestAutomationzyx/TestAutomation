@@ -2,6 +2,7 @@ package com.testautomationservice;
 
 import java.util.List;
 
+import com.element.Position.Element;
 import com.utils.UIDump;
 
 public interface ToolApi {
@@ -9,7 +10,7 @@ public interface ToolApi {
 	String adbShell(String cmd);
 	void sendKeyCode(int keycode);
 	String getSimOperator();
-	String getElementValuebyId(String id,int index,boolean fresh,String item);
+	String getElementValuebyId(String id,int index,boolean fresh,int attri);
 	String getCurrentPackageAndActicity();
 	String getCurrentPackage();
 	String getCurrentActivity();
@@ -17,12 +18,15 @@ public interface ToolApi {
 	String closeApplication(String apppackage);
 	String closeCurrentApplicaion();
 	boolean touch(String e, int type, int index, boolean fresh, long times);
+	boolean touch(Element e,long times);
 	boolean touchText(String e, int index, boolean fresh,long times);
 	boolean touchId(String id, int index, boolean fresh,long times);
 	void touch(double x, double y,long times);
 	boolean slidebyId(String id1, String id2,boolean fresh,long times);
 	boolean waitforId(String id,int index,long times);
 	boolean waitforText(String text,int index,long times);
+	Element searchElementbyId(String id,int index,boolean fresh);
+	Element searchElementbyText(String text,int index,boolean fresh);
 	boolean isPlaying();
 	boolean hasSIMCard();
 	void operateWifi(boolean open);
@@ -48,6 +52,6 @@ public interface ToolApi {
 	String toStep(String step);
 	boolean toResult(boolean result);
 	void addtoFile(String file, String step,boolean result);
-	List<UIDump> getUIDump(boolean fresh);
-	
+	List<UIDump> getUIDump(boolean fresh);	
+	public String getScreenText(boolean fresh);
 }

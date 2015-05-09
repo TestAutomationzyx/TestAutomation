@@ -8,8 +8,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
         android:gravity="center_vertical"
-        android:drawableLeft="@drawable/actions_comment"
+        android:drawableLeft="@drawable/actions_info"
         android:text="@string/information"
         android:textSize="@dimen/bigtitle" />
     
@@ -22,6 +23,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
         android:paddingTop="@dimen/padding"
         android:orientation="vertical">
         

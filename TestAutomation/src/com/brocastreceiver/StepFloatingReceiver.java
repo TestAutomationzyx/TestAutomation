@@ -1,10 +1,13 @@
 package com.brocastreceiver;
 
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+
+import com.element.AdbShell;
 
 public class StepFloatingReceiver extends FloatingService {
 	
@@ -58,6 +61,14 @@ public class StepFloatingReceiver extends FloatingService {
 	public void setTextColor(int color) {
 		// TODO Auto-generated method stub
 		super.setTextColor(color);
+	}
+	
+	@Override
+	public void clickIcon() {
+		// TODO Auto-generated method stub
+		super.clickIcon();	
+		AdbShell adb = new AdbShell();
+		adb.adbshell("am force-stop com.testautomationclient");
 	}
 	
 }
