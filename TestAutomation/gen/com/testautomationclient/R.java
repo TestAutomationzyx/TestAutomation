@@ -85,12 +85,15 @@ containing a value of this type.
         public static final int button=0x7f020011;
         public static final int button_sure=0x7f020012;
         public static final int delete=0x7f020013;
-        public static final int filled_box=0x7f020014;
-        public static final int floating=0x7f020015;
-        public static final int ic_launcher=0x7f020016;
-        public static final int ic_launcher1=0x7f020017;
-        public static final int radius_button=0x7f020018;
-        public static final int wifi=0x7f020019;
+        public static final int dump=0x7f020014;
+        public static final int dump2=0x7f020015;
+        public static final int filled_box=0x7f020016;
+        public static final int float_button=0x7f020017;
+        public static final int floating=0x7f020018;
+        public static final int ic_launcher=0x7f020019;
+        public static final int ic_launcher1=0x7f02001a;
+        public static final int radius_button=0x7f02001b;
+        public static final int wifi=0x7f02001c;
     }
     public static final class id {
         public static final int SSIDpassword=0x7f090039;

@@ -19,7 +19,7 @@ public class LogCatReceiver extends Service {
 	private static final String LOG_PATH = SDCARD_PATH+"/TestAutomation/log";
 	private static final String LOG_FILE = LOG_PATH + "/log_verbose.txt";
 	
-	private static final String CMD_SU = "su";
+	private static final String CMD_SU = "sh";
     private static final String CMD_LINE_END = "\n";
     private static final String CMD_EXITS = "exit\n";
     private static final String CMD_GET_lOG = "logcat -v time *:V >" + LOG_FILE;

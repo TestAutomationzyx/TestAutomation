@@ -17,6 +17,7 @@ public class StepFloatingReceiver extends FloatingService {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
+		super.setIconMoveable(true);
 		super.setTextBackground(Color.TRANSPARENT);
 		stepShow();
 	}

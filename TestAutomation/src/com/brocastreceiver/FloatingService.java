@@ -104,30 +104,7 @@ public class FloatingService extends Service {
 				.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
 //        Log.i(TAG, "Width/2--->" + mFloatView.getMeasuredWidth()/2);
 //        Log.i(TAG, "Height/2--->" + mFloatView.getMeasuredHeight()/2);
-        //设置监听浮动窗口的触摸移动
-        mFloatView.setOnTouchListener(new OnTouchListener() 
-        {
-			
-			@Override
-			public boolean onTouch(View v, MotionEvent event) 
-			{
-				// TODO Auto-generated method stub
-				//getRawX是触摸位置相对于屏幕的坐标，getX是相对于按钮的坐标
-				wmParams.x = (int) event.getRawX() - mFloatView.getMeasuredWidth()/2;
-				//Log.i(TAG, "Width/2--->" + mFloatView.getMeasuredWidth()/2);
-//				Log.i(TAG, "RawX" + event.getRawX());
-//				Log.i(TAG, "X" + event.getX());
-				//25为状态栏的高度
-	            wmParams.y = (int) event.getRawY() - mFloatView.getMeasuredHeight()/2 - 25;
-	           // Log.i(TAG, "Width/2--->" + mFloatView.getMeasuredHeight()/2);
-//	            Log.i(TAG, "RawY" + event.getRawY());
-//	            Log.i(TAG, "Y" + event.getY());
-	             //刷新
-	            mWindowManager.updateViewLayout(mFloatLayout, wmParams);
-				return false;
-			}
-		});	
-        
+       
         mFloatView.setOnClickListener(new OnClickListener() 
         {
 			
@@ -170,6 +147,34 @@ public class FloatingService extends Service {
 	
 	public void setIconSrc(int resId){
 		mFloatView.setImageResource(resId);
+	}
+	
+	public void setIconMoveable(boolean moveable){
+		if(moveable){
+			//设置监听浮动窗口的触摸移动
+	        mFloatView.setOnTouchListener(new OnTouchListener() 
+	        {
+				
+				@Override
+				public boolean onTouch(View v, MotionEvent event) 
+				{
+					// TODO Auto-generated method stub
+					//getRawX是触摸位置相对于屏幕的坐标，getX是相对于按钮的坐标
+					wmParams.x = (int) event.getRawX() - mFloatView.getMeasuredWidth()/2;
+					//Log.i(TAG, "Width/2--->" + mFloatView.getMeasuredWidth()/2);
+//					Log.i(TAG, "RawX" + event.getRawX());
+//					Log.i(TAG, "X" + event.getX());
+					//25为状态栏的高度
+		            wmParams.y = (int) event.getRawY() - mFloatView.getMeasuredHeight()/2 - 25;
+		           // Log.i(TAG, "Width/2--->" + mFloatView.getMeasuredHeight()/2);
+//		            Log.i(TAG, "RawY" + event.getRawY());
+//		            Log.i(TAG, "Y" + event.getY());
+		             //刷新
+		            mWindowManager.updateViewLayout(mFloatLayout, wmParams);
+					return false;
+				}
+			});
+		}
 	}
 	
 	public void setIconUnvisual(){

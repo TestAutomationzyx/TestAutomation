@@ -58,8 +58,13 @@
             android:label="@string/debugcase"
             android:theme="@style/MyDialog">           
         </activity>
+        <activity 
+            android:name=".LoadingActivity"
+            android:theme="@style/MyDialog"
+            ></activity>
         <service android:name=".More"></service>
         <service android:name="com.brocastreceiver.FloatingService"></service>
+        <service android:name="com.brocastreceiver.DumpFileService"></service>
         <service android:name="com.brocastreceiver.LogCatReceiver" android:process="com.brocastreceiver.errorlog"></service>
         <service android:name="com.brocastreceiver.StepFloatingReceiver" android:process="com.brocastreceiver.step"></service>
         <service android:name="com.brocastreceiver.LogFloatingReceiver" android:process="com.brocastreceiver.log"></service>

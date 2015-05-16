@@ -20,6 +20,7 @@
             android:layout_width="45dp"
             android:layout_height="40dp"
             android:layout_marginLeft="15dp"
+            android:background="@drawable/actions_item_selector"
             android:contentDescription="@string/start"
             android:layout_weight="0.15"
             android:src="@drawable/actions_start" />
@@ -32,6 +33,7 @@
             android:layout_height="40dp"
             android:layout_marginRight="15dp"
             android:layout_weight="0.15"
+            android:background="@drawable/actions_item_selector"
             android:contentDescription="@string/html"
             android:src="@drawable/actions_html" />
 

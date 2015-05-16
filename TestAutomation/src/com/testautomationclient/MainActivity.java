@@ -26,7 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.brocastreceiver.FloatingService;
+import com.brocastreceiver.DumpFileService;
 import com.testautomationclient.MyGridLayout.GridAdatper;
 import com.testautomationclient.MyGridLayout.OnItemClickListener;
 import com.testcase.CaseItems;
@@ -118,9 +118,8 @@ public class MainActivity extends Activity {
 
 
 	public void start(View view) {
-		Intent intent = new Intent(MainActivity.this, FloatingService.class);
+		Intent intent = new Intent(MainActivity.this,DumpFileService.class);	
 		startService(intent);
-		finish();
 	}
 	
 	public void upload(View view){
@@ -212,7 +211,8 @@ public class MainActivity extends Activity {
 	}
 	
 	protected void information() {
-		Intent intent = new Intent(MainActivity.this, Information.class);
+		Intent intent = new Intent(MainActivity.this, LoadingActivity.class);//Information
+		intent.putExtra("type", 0);
 		startActivity(intent);		
 	}
 	
@@ -222,7 +222,7 @@ public class MainActivity extends Activity {
 	}
 	
 	protected void openLog() {
-		OpenLog openLog = new OpenLog(context);
+		new OpenLog(context);
 	}
 	
 	protected void wifiMonitor() {
@@ -236,7 +236,8 @@ public class MainActivity extends Activity {
 	}
 	
 	protected void more() {
-		Intent intent = new Intent(MainActivity.this, More.class);
-		startService(intent);
+		Intent intent = new Intent(MainActivity.this, LoadingActivity.class);//More
+		intent.putExtra("type", 1);
+		startActivity(intent);
 	}
 }
