@@ -49,6 +49,7 @@ public class Phone {
 
 	private void returnHomeCase() {
 		step = MyAutoTool.toStep("·µ»Ø×ÀÃæ");
+		MyAutoTool.slideScreenTop();
 		MyAutoTool.returnHome();
 		result = MyAutoTool.toResult(true);
 		MyAutoTool.addtoFile(TAG,step, result);		

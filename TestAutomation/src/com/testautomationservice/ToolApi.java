@@ -28,7 +28,7 @@ public interface ToolApi {
 	Element searchElementbyId(String id,int index,boolean fresh);
 	Element searchElementbyText(String text,int index,boolean fresh);
 	boolean isPlaying();
-	boolean hasSIMCard();
+	boolean hasSIMCard();	
 	void operateWifi(boolean open);
 	void slideScreenLeft();
 	void slideScreenRight();

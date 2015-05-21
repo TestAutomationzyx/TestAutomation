@@ -201,7 +201,7 @@ public class AdbShell {
 	 *            元素对象
 	 */
 	public void touch(Element e) {
-		ShellUtils.execCommand("input tap " + e.getX() + " " + e.getY(), false);
+		ShellUtils.execCommand("input tap " + e.getX() + " " + e.getY(), true);
 		sleep(100);
 	}
 
